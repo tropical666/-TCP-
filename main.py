@@ -1,6 +1,3 @@
-# coding=gbk
-# 2024/8/13½«³ÇÊĞµÄÅĞ¶Ï·½·¨Í³Ò»·â×°£¬Ê¡ÁË¼¸°ÙĞĞ
-# 2024/11/6½«ÅĞ¶Ï·½·¨·â×°£¬ÓÖÊ¡ÁË¼¸°ÙĞĞ
 import random
 from tkinter import *
 import tkinter as tk
@@ -16,880 +13,311 @@ import numpy as np
 from tkinter.simpledialog import askfloat, askinteger, askstring
 import matplotlib.pyplot as plt
 import time
-
-# µÚÒ»²¿·Ö£º½øÈëÒ³ÃæµÄÉè¼Æ
-¿ªÊ¼Ò³Ãæ = tk.Tk()
-¿ªÊ¼Ò³Ãæ.geometry("500x600")
-
-¿ªÊ¼Ò³Ãæstate = 0
-¿ªÊ¼Ò³Ãæ.·½¸ñ1a = Image.open("ÓÎÏ·Í¼Æ¬/´ó¸»ÎÌ·âÃæ.png")  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-¿ªÊ¼Ò³Ãæ.·½¸ñ1a = ¿ªÊ¼Ò³Ãæ.·½¸ñ1a.resize((500, 600))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-¿ªÊ¼Ò³Ãæ.·½¸ñ1b = ImageTk.PhotoImage(¿ªÊ¼Ò³Ãæ.·½¸ñ1a)
-¿ªÊ¼Ò³Ãæ.·½¸ñ1c = ttk.Label(image=¿ªÊ¼Ò³Ãæ.·½¸ñ1b)
-¿ªÊ¼Ò³Ãæ.·½¸ñ1c.place(x=0, y=0)
-
-
-def ÍË³ö():
-    quit()
-
-
-class Í¼Æ¬°´Å¥:
-    def __init__(¿ªÊ¼Ò³Ãæ, Â·¾¶, Î»ÖÃ, ´óĞ¡, ·½·¨):
-        ¿ªÊ¼Ò³Ãæ.Â·¾¶ = Â·¾¶
-        ¿ªÊ¼Ò³Ãæ.Î»ÖÃ = Î»ÖÃ
-        ¿ªÊ¼Ò³Ãæ.´óĞ¡ = ´óĞ¡
-        ¿ªÊ¼Ò³Ãæ.lst = []
-        ¿ªÊ¼Ò³Ãæ.·½¸ñ1a = Image.open(Â·¾¶)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-        ¿ªÊ¼Ò³Ãæ.·½¸ñ1a = ¿ªÊ¼Ò³Ãæ.·½¸ñ1a.resize((´óĞ¡[0], ´óĞ¡[1]))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-        ¿ªÊ¼Ò³Ãæ.·½¸ñ1b = ImageTk.PhotoImage(¿ªÊ¼Ò³Ãæ.·½¸ñ1a)
-        ¿ªÊ¼Ò³Ãæ.·½¸ñ1c = tk.Button(image=¿ªÊ¼Ò³Ãæ.·½¸ñ1b, command=·½·¨)
-        ¿ªÊ¼Ò³Ãæ.lst.append(¿ªÊ¼Ò³Ãæ.·½¸ñ1c)
-        ¿ªÊ¼Ò³Ãæ.lst[-1].place(x=Î»ÖÃ[0], y=Î»ÖÃ[1])
-global ai_
-ai_=[]
-def ¿ªÊ¼ÓÎÏ·1():
-    global ¿ªÊ¼Ò³Ãæstate,ai_
-    ¿ªÊ¼Ò³Ãæ.destroy()
-    ¿ªÊ¼Ò³Ãæstate = 1
-    ai_=[0,0,1,1,1]
-def ¿ªÊ¼ÓÎÏ·2():
-    global ¿ªÊ¼Ò³Ãæstate,ai_
-    ¿ªÊ¼Ò³Ãæ.destroy()
-    ¿ªÊ¼Ò³Ãæstate = 1
-    ai_ = [0, 0, 0, 1, 1]
-def ¿ªÊ¼ÓÎÏ·3():
-    global ¿ªÊ¼Ò³Ãæstate,ai_
-    ¿ªÊ¼Ò³Ãæ.destroy()
-    ¿ªÊ¼Ò³Ãæstate = 1
-    ai_ = [0, 0, 0, 0, 0]
-¿ªÊ¼ÓÎÏ·°´Å¥1 = Í¼Æ¬°´Å¥("ÓÎÏ·Í¼Æ¬/µ¥ÈËÓÎÏ·.png", (50, 200), (120, 60), ¿ªÊ¼ÓÎÏ·1)
-¿ªÊ¼ÓÎÏ·°´Å¥2 = Í¼Æ¬°´Å¥("ÓÎÏ·Í¼Æ¬/Ë«ÈËÓÎÏ·.png", (50, 275), (120, 60), ¿ªÊ¼ÓÎÏ·2)
-¿ªÊ¼ÓÎÏ·°´Å¥3 = Í¼Æ¬°´Å¥("ÓÎÏ·Í¼Æ¬/ËÄÈËÓÎÏ·.png", (50, 350), (120, 60), ¿ªÊ¼ÓÎÏ·3)
-ÍË³öÓÎÏ·°´Å¥ = Í¼Æ¬°´Å¥("ÓÎÏ·Í¼Æ¬/ÍË³öÓÎÏ·.png", (330, 350), (120, 60), ÍË³ö)
-¿ªÊ¼Ò³Ãæ.mainloop()
-if ¿ªÊ¼Ò³Ãæstate == 0:
-    quit()
-
-# 1200x600,Ã¿ĞĞ10¸ö¸ñ£¬Ã¿ÁĞ5¸ö¸ñ£¬Ã¿¸ö¸ñ120*120
-root = tk.Tk()
-root.geometry("1600x750")  # ³¤³Ë¿í
-w1 = Canvas(root, width=1200, height=650, background='blue')
-w1.place(x=0, y=0)
-
-# ³õÊ¼»¯½ğÇ®
-global money
-money = [0, 1200, 1200, 1200, 1200]  # »¹ÊÇÓÃÁĞ±íÀ´´æ´¢°É
-Íæ¼Ò1½ğÇ®¼ÇÂ¼ = [money[1]]
-Íæ¼Ò2½ğÇ®¼ÇÂ¼ = [money[2]]
-Íæ¼Ò3½ğÇ®¼ÇÂ¼ = [money[3]]
-Íæ¼Ò4½ğÇ®¼ÇÂ¼ = [money[4]]
-global ÆÆ²ú, ÆÆ²úÈËÊı
-ÆÆ²úÈËÊı = 0
-ÆÆ²ú = [1, 0, 0, 0, 0]  # ¶¨ÒåÆÆ²ú×´Ì¬
-global Íæ¼ÒÊÂ¼ş
-Íæ¼ÒÊÂ¼ş = []
-for _ in range(5):
-    Íæ¼ÒÊÂ¼ş.append([])
-Íæ¼ÒÊÂ¼ş[1] = []
-Íæ¼ÒÊÂ¼ş[2] = []
-Íæ¼ÒÊÂ¼ş[3] = []
-Íæ¼ÒÊÂ¼ş[4] = []
-
-
-class ¸ù°´Å¥:
-    def __init__(root, x, y, ÎÄ±¾):
-        root.ÎÄ±¾ = ÎÄ±¾
-        root.x = x
-        root.y = y
-        root.×Ó½áµã = []
-        root.state = 0
-        global y0
-        y0 = y
-
-        def Õ¹Ê¾×Ó°´Å¥():
-            global bt, °´Å¥ĞòºÅ
-            if len(bt) == 0:  # btÊÇ°´Å¥µÄÕ»£¬µ±Õ»Îª¿Õ£¬ËµÃ÷Ã»ÓĞ°´Å¥±»Õ¹¿ª
-                root.state = 0  # °´Å¥µÄstate±íÊ¾µÄÊÇ°´Å¥ÊÇ·ñÒÑ¾­±»°´ÏÂ¹ı£¨state=0Ê±£¬µã»÷°´Å¥»áÕ¹¿ª£¬state=1Ê±»áÕÛµş£©
-            else:
-                °´Å¥ĞòºÅ = 0  # °´Å¥ĞòºÅÓÃÀ´±ê¼Ç°´Å¥£¬·½±ãÈëÕ»³öÕ»
-            if root.state == 0:
-                if len(bt) > 0:  # µ±ÓĞ±ğµÄ¸ù°´Å¥´¦ÓÚÕ¹¿ª×´Ì¬£¬Çå¿Õ£¬ÕâÑù±£Ö¤½çÃæÕû½à
-                    for _ in range(len(bt)):
-                        bt[_][1].destroy()
-                bt.clear()
-                for _ in range(len(root.×Ó½áµã)):  # ±éÀúÕ¹¿ª×Ô¼ºµÄ×Ó½Úµã
-                    °´Å¥ĞòºÅ += 1
-                    root.×Ó½áµã[_].x = x
-                    root.×Ó½áµã[_].y = 27 * _ + 30  # ¸ø×Ó½ÚµãºÃµÄÎ»ÖÃ£¬·½±ã²é¿´
-                    root.×Ó½áµã[_].ĞòºÅ = °´Å¥ĞòºÅ
-                    if len(root.×Ó½áµã[_].×Ó½áµã) > 0:
-                        root.×Ó½áµã[_].ÎÄ×Ö += ">"
-                    root.×Ó½áµã[_].ÎÄ×Ö = root.×Ó½áµã[_].ÎÄ×Ö.ljust(20, " ")  # ÉèÖÃ×Ó½Úµã
-                    b = tk.Button(text=root.×Ó½áµã[_].ÎÄ×Ö, command=root.×Ó½áµã[_].·½·¨)  # Îª×Ó½Úµã´«²Î
-                    bt.append((°´Å¥ĞòºÅ, b))  # ÈëÕ»£¬²¢·ÅÖÃ×Ó½Úµã
-                    bt[-1][1].place(x=root.x, y=27 * _ + 30)
-                root.state += 1
-                # print(root.x)
-            elif root.state == 1:  # state=1ÒâË¼ÊÇÔÙµã»÷¾ÍÕÛµş
-                °´Å¥ĞòºÅ = 0  # ÖØÖÃ°´Å¥ĞòºÅ²ÎÊı£¬ÕâÑù¿ÉÒÔÖØ¸´Õ¹¿ª
-                for _ in root.×Ó½áµã:  # ÈÃ×Ó½Úµã¶¼ÖØÖÃÎªÃ»±»µã»÷µÄ×´Ì¬
-                    _.state = 0
-                for _ in range(len(bt)):  # ¶ÁÕ»£¬´ÓÕ»ÖĞÒÆ³ı×Ó°´Å¥£¬´ïµ½ÕÛµşµÄĞ§¹û
-                    bt[-1 - _][1].destroy()
-                root.state = 0
-
-                bt.clear()  # Çå¿ÕÕ»£¬ÎªÏÂ´ÎÕ¹¿ª×¼±¸
-                # print(bt)
-
-        root.°´Å¥ = tk.Button(text=ÎÄ±¾ + ">", command=Õ¹Ê¾×Ó°´Å¥, height=1)
-        root.°´Å¥.place(x=x, y=y)
-
-
-class ×Ó°´Å¥:
-    def __init__(root, ÎÄ×Ö, ¸ù°´Å¥, ·½·¨):
-        root.ÎÄ×Ö = ÎÄ×Ö
-        root.·½·¨ = ·½·¨
-        root.×Ó½áµã = []
-        root.state = 0
-        root.x = 0
-        root.y = 0
-        root.ĞòºÅ = 0
-
-        def Õ¹Ê¾×Ó°´Å¥():
-            global bt, °´Å¥ĞòºÅ
-            if root.ĞòºÅ == 0:
-                °´Å¥ĞòºÅ += 1  # ÓÃĞòºÅÀ´±ê¼Ç×ÔÉí£¬·½±ã¹ÜÀíÕ»
-                root.ĞòºÅ = °´Å¥ĞòºÅ
-            if root.ĞòºÅ == len(bt):
-                root.state = 0  # ÖØÖÃ×Ó°´Å¥
-            if root.state == 0:
-                for _ in range(len(root.×Ó½áµã)):
-                    root.×Ó½áµã[_].x = root.x + 80  # ×Ó°´Å¥Î»ÖÃ£¬ÈÃ×Ó°´Å¥ºÍ¸¸°´Å¥´í¿ª
-                    root.×Ó½áµã[_].y = root.y + _ * 27  # ×Ó°´Å¥Î»ÖÃ£¬ÈÃ×Ó°´Å¥ºÍ¸¸°´Å¥´í¿ª
-                    b = tk.Button(text=root.×Ó½áµã[_].ÎÄ×Ö, command=root.×Ó½áµã[_].·½·¨)  # ´«Èë×Ó°´Å¥·½·¨
-                    bt.append((°´Å¥ĞòºÅ, b))  # ÓÃÕ»´æ´¢×Ó°´Å¥·½±ã¹ÜÀí
-                    bt[-1][1].place(x=root.x + 100, y=root.y + _ * 27)
-                root.state += 1  # Õ¹¿ªºó£¬ÔÙµã»÷¾Í±ä³ÉÕÛµş×´Ì¬
-            elif root.state == 1:
-                for _ in root.×Ó½áµã:
-                    _.state = 0
-                Òª¼õÈ¥µÄ°´Å¥ÊıÁ¿ = len(bt) - root.ĞòºÅ  # ÒâË¼ÊÇ°Ñ×Ô¼ºµÄ×Ó°´Å¥¶¼ÕÛµşÁË£¬µ«×ÔÉíºÍ×ÔÉíµÄ¸¸°´Å¥¶¼²»ÕÛµş
-                for _ in range(Òª¼õÈ¥µÄ°´Å¥ÊıÁ¿):
-                    bt[-1][1].destroy()  # ¶ÁÕ»£¬È¥µô×Ó°´Å¥
-                    bt.pop()  # ³öÕ»
-                root.state = 0  # ÖØÖÃ°´Å¥
-
-        if root.·½·¨ == None:
-            root.·½·¨ = Õ¹Ê¾×Ó°´Å¥
-        ¸ù°´Å¥.×Ó½áµã.append(root)
-
-
-class Í¼Æ¬°´Å¥:
-    def __init__(root, Â·¾¶, Î»ÖÃ, ´óĞ¡, ·½·¨):
-        root.Â·¾¶ = Â·¾¶
-        root.Î»ÖÃ = Î»ÖÃ
-        root.´óĞ¡ = ´óĞ¡
-        root.lst = []
-        root.·½¸ñ1a = Image.open(Â·¾¶)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-        root.·½¸ñ1a = root.·½¸ñ1a.resize((´óĞ¡[0], ´óĞ¡[1]))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-        root.·½¸ñ1b = ImageTk.PhotoImage(root.·½¸ñ1a)
-        root.·½¸ñ1c = tk.Button(image=root.·½¸ñ1b, command=·½·¨)
-        root.lst.append(root.·½¸ñ1c)
-        root.lst[-1].place(x=Î»ÖÃ[0], y=Î»ÖÃ[1])
-
-global bt, °´Å¥ĞòºÅ
-bt = []
-°´Å¥ĞòºÅ = 0
-
-def Çå¿Õ¿Ø¼ş():
-    global bt
-    for i in bt:
-        i[1].destroy()
-    bt.clear()
-
-def Ìø×ªµ½½áËãÒ³Ãæ():
-    root.destroy()
-
-def ĞŞ¸ÄÍæ¼Ò1½ğÇ®():
-    if ÆÆ²ú[1] == 1:
-        messagebox.showinfo("ÌáÊ¾", f"Íæ¼Ò{1}ÒÑÆÆ²ú")
-    if ÆÆ²ú[1] != 1:
-        y = askinteger("", "¶àÉÙÇ®")
-        if y != None:
-            money[1] = y
-            Íæ¼ÒÊÂ¼ş[1].append(f"½ğÇ®±»ĞŞ¸Äµ½{money[1]}Ôª")
-        if stateall == 0:
-            ÎÄ×ÖË¢ĞÂ(1)
-        ¸»ºÀ°ñ¸üĞÂ()
-        Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò2½ğÇ®():
-    if ÆÆ²ú[2] == 1:
-        messagebox.showinfo("ÌáÊ¾", f"Íæ¼Ò{2}ÒÑÆÆ²ú")
-    if ÆÆ²ú[2] != 1:
-        y = askinteger("", "¶àÉÙÇ®£¿")
-        if y != None:
-            money[2] = y
-        if stateall == 1:
-            ÎÄ×ÖË¢ĞÂ(2)
-        ¸»ºÀ°ñ¸üĞÂ()
-        Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò3½ğÇ®():
-    if ÆÆ²ú[3] == 1:
-        messagebox.showinfo("ÌáÊ¾", f"Íæ¼Ò{3}ÒÑÆÆ²ú")
-    if ÆÆ²ú[3] != 1:
-        y = askinteger("", "¶àÉÙÇ®£¿")
-        if y != None:
-            money[3] = y
-        if stateall == 2:
-            ÎÄ×ÖË¢ĞÂ(3)
-        ¸»ºÀ°ñ¸üĞÂ()
-        Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò4½ğÇ®():
-    if ÆÆ²ú[4] == 1:
-        messagebox.showinfo("ÌáÊ¾", f"Íæ¼Ò{4}ÒÑÆÆ²ú")
-    if ÆÆ²ú[4] != 1:
-        y = askinteger("", "¶àÉÙÇ®£¿")
-        if y != None:
-            money[4] = y
-        if stateall == 3:
-            ÎÄ×ÖË¢ĞÂ(4)
-        ¸»ºÀ°ñ¸üĞÂ()
-        Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò1Í·Ïñ·½·¨():
-    file_path = filedialog.askopenfilename()
-    newfile_path = file_path.split(".")
-    if newfile_path[-1] not in ["png", "jepg", "jpg"]:
-        messagebox.showinfo("ÌáÊ¾", "Äú´ò¿ªµÄ²»ÊÇÍ¼Æ¬")
-    else:
-        ½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[1] = file_path
-        ½ÇÉ«[0].´«ÈëĞÂÂ·¾¶(file_path, 1)
-    Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò2Í·Ïñ·½·¨():
-    file_path = filedialog.askopenfilename()
-    newfile_path = file_path.split(".")
-    if newfile_path[-1] not in ["png", "jepg", "jpg"]:
-        messagebox.showinfo("ÌáÊ¾", "Äú´ò¿ªµÄ²»ÊÇÍ¼Æ¬")
-    else:
-        ½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[2] = file_path
-        ½ÇÉ«[1].´«ÈëĞÂÂ·¾¶(file_path, 2)
-    Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò3Í·Ïñ·½·¨():
-    file_path = filedialog.askopenfilename()
-    newfile_path = file_path.split(".")
-    if newfile_path[-1] not in ["png", "jepg", "jpg"]:
-        messagebox.showinfo("ÌáÊ¾", "Äú´ò¿ªµÄ²»ÊÇÍ¼Æ¬")
-    else:
-        ½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[3] = file_path
-        ½ÇÉ«[2].´«ÈëĞÂÂ·¾¶(file_path, 3)
-    Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍæ¼Ò4Í·Ïñ·½·¨():
-    file_path = filedialog.askopenfilename()
-    newfile_path = file_path.split(".")
-    if newfile_path[-1] not in ["png", "jepg", "jpg"]:
-        messagebox.showinfo("ÌáÊ¾", "Äú´ò¿ªµÄ²»ÊÇÍ¼Æ¬")
-    else:
-        ½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[4] = file_path
-        ½ÇÉ«[3].´«ÈëĞÂÂ·¾¶(file_path, 4)
-    Çå¿Õ¿Ø¼ş()
-
-
-def Íæ¼Ò1ĞÅÏ¢²éÑ¯·½·¨():
-    print(Íæ¼ÒÊÂ¼ş[1])
-    a = ¹ö¶¯¿Ø¼ş(Íæ¼ÒÊÂ¼ş[1])
-
-    try:
-        Çå¿Õ¿Ø¼ş()
-    except:
-        pass
-
-
-def Íæ¼Ò2ĞÅÏ¢²éÑ¯·½·¨():
-    a = ¹ö¶¯¿Ø¼ş(Íæ¼ÒÊÂ¼ş[2])
-    Çå¿Õ¿Ø¼ş()
-
-
-def Íæ¼Ò3ĞÅÏ¢²éÑ¯·½·¨():
-    a = ¹ö¶¯¿Ø¼ş(Íæ¼ÒÊÂ¼ş[3])
-    Çå¿Õ¿Ø¼ş()
-
-
-def Íæ¼Ò4ĞÅÏ¢²éÑ¯·½·¨():
-    a = ¹ö¶¯¿Ø¼ş(Íæ¼ÒÊÂ¼ş[4])
-    Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸ÄÍÁµØ¼Û¸ñ·½·¨():
-    global µØ¼Û
-    y = askinteger("", '¶àÉÙÇ®£¿')
-    if y != None:
-        µØ¼Û = y
-    Çå¿Õ¿Ø¼ş()
-
-
-def ĞŞ¸Ä¹ıÂ··Ñ·½·¨():
-    global ¹ıÂ··Ñ
-    y = askinteger("", '¶àÉÙÇ®£¿')
-    if y != None:
-        ¹ıÂ··Ñ = y
-    Çå¿Õ¿Ø¼ş()
-
-
-def ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨1():
-    if ¹ãÖİ.state == 0:
-        tk.messagebox.showinfo("ÌáÊ¾", "¹ãÖİÄ¿Ç°¹«ÓĞ")
-    else:
-        tk.messagebox.showinfo("ÌáÊ¾", f"¹ãÖİÄ¿Ç°¹éÍæ¼Ò{¹ãÖİ.state}ËùÓĞ")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨2():
-    if Ïã¸Û.state == 0:
-        tk.messagebox.showinfo("ÌáÊ¾", "Ïã¸ÛÄ¿Ç°¹«ÓĞ")
-    else:
-        tk.messagebox.showinfo("ÌáÊ¾", f"Ïã¸ÛÄ¿Ç°¹éÍæ¼Ò{Ïã¸Û.state}ËùÓĞ")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨3():
-    if ÉÏº£.state == 0:
-        tk.messagebox.showinfo("ÌáÊ¾", "ÉÏº£Ä¿Ç°¹«ÓĞ")
-    else:
-        tk.messagebox.showinfo("ÌáÊ¾", f"ÉÏº£Ä¿Ç°¹éÍæ¼Ò{ÉÏº£.state}ËùÓĞ")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨4():
-    if Å¦Ô¼.state == 0:
-        tk.messagebox.showinfo("ÌáÊ¾", "Å¦Ô¼Ä¿Ç°¹«ÓĞ")
-    else:
-        tk.messagebox.showinfo("ÌáÊ¾", f"Å¦Ô¼Ä¿Ç°¹éÍæ¼Ò{Å¦Ô¼.state}ËùÓĞ")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨5():
-    if ±±¾©.state == 0:
-        tk.messagebox.showinfo("ÌáÊ¾", "±±¾©Ä¿Ç°¹«ÓĞ")
-    else:
-        tk.messagebox.showinfo("ÌáÊ¾", f"±±¾©Ä¿Ç°¹éÍæ¼Ò{±±¾©.state}ËùÓĞ")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨6():
-    if Â×¶Ø.state == 0:
-        tk.messagebox.showinfo("ÌáÊ¾", "Â×¶ØÄ¿Ç°¹«ÓĞ")
-    else:
-        tk.messagebox.showinfo("ÌáÊ¾", f"Â×¶ØÄ¿Ç°¹éÍæ¼Ò{Â×¶Ø.state}ËùÓĞ")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ¿ª·¢ÕßĞÅÏ¢ÏÔÊ¾·½·¨():
-    messagebox.showinfo("ÌáÊ¾", "2022210993ÁõÙ¾³Ï")
-    Çå¿Õ¿Ø¼ş()
-
-
-def ÏÔÊ¾Í¼Àı():
-
-    a = Image.open("ÓÎÏ·Í¼Æ¬/Í¼Àı.png")
-    a.show()
-    Çå¿Õ¿Ø¼ş()
-
-ÎÄ¼ş = ¸ù°´Å¥(0, 0, "ÎÄ¼ş                   ")
-±à¼­ = ¸ù°´Å¥(120, 0, "±à¼­                   ")
-ÍË³ö°´Å¥ = ×Ó°´Å¥("ÍË³öÓÎÏ·   ", ÎÄ¼ş, ÍË³ö)
-´ò¿ª½áËãÒ³Ãæ°´Å¥ = ×Ó°´Å¥("Ìø×ªµ½½áËãÒ³Ãæ  ", ÎÄ¼ş, Ìø×ªµ½½áËãÒ³Ãæ)
-
-ĞŞ¸ÄÍÁµØ¼Û¸ñ = ×Ó°´Å¥("ĞŞ¸ÄÍÁµØ¼Û¸ñ", ±à¼­, ĞŞ¸ÄÍÁµØ¼Û¸ñ·½·¨)
-ĞŞ¸Ä¹ıÂ··Ñ = ×Ó°´Å¥("ĞŞ¸Ä¹ıÂ··Ñ", ±à¼­, ĞŞ¸Ä¹ıÂ··Ñ·½·¨)
-ĞŞ¸ÄÍæ¼Ò½ğÇ®°´Å¥ = ×Ó°´Å¥("ĞŞ¸ÄÍæ¼Ò½ğÇ®", ±à¼­, None)
-ĞŞ¸ÄÍæ¼Ò1½ğÇ®°´Å¥ = ×Ó°´Å¥("Íæ¼Ò1", ĞŞ¸ÄÍæ¼Ò½ğÇ®°´Å¥, ĞŞ¸ÄÍæ¼Ò1½ğÇ®)
-ĞŞ¸ÄÍæ¼Ò2½ğÇ®°´Å¥ = ×Ó°´Å¥("Íæ¼Ò2", ĞŞ¸ÄÍæ¼Ò½ğÇ®°´Å¥, ĞŞ¸ÄÍæ¼Ò2½ğÇ®)
-ĞŞ¸ÄÍæ¼Ò3½ğÇ®°´Å¥ = ×Ó°´Å¥("Íæ¼Ò3", ĞŞ¸ÄÍæ¼Ò½ğÇ®°´Å¥, ĞŞ¸ÄÍæ¼Ò3½ğÇ®)
-ĞŞ¸ÄÍæ¼Ò4½ğÇ®°´Å¥ = ×Ó°´Å¥("Íæ¼Ò4", ĞŞ¸ÄÍæ¼Ò½ğÇ®°´Å¥, ĞŞ¸ÄÍæ¼Ò4½ğÇ®)
-
-ĞŞ¸ÄÍæ¼ÒÍ·Ïñ°´Å¥ = ×Ó°´Å¥("ĞŞ¸ÄÍæ¼ÒÍ·Ïñ", ±à¼­, None)
-ĞŞ¸ÄÍæ¼Ò1Í·Ïñ°´Å¥ = ×Ó°´Å¥("Íæ¼Ò1", ĞŞ¸ÄÍæ¼ÒÍ·Ïñ°´Å¥, ĞŞ¸ÄÍæ¼Ò1Í·Ïñ·½·¨)
-ĞŞ¸ÄÍæ¼Ò2Í·Ïñ°´Å¥ = ×Ó°´Å¥("Íæ¼Ò2", ĞŞ¸ÄÍæ¼ÒÍ·Ïñ°´Å¥, ĞŞ¸ÄÍæ¼Ò2Í·Ïñ·½·¨)
-ĞŞ¸ÄÍæ¼Ò3Í·Ïñ°´Å¥ = ×Ó°´Å¥("Íæ¼Ò3", ĞŞ¸ÄÍæ¼ÒÍ·Ïñ°´Å¥, ĞŞ¸ÄÍæ¼Ò3Í·Ïñ·½·¨)
-ĞŞ¸ÄÍæ¼Ò4Í·Ïñ°´Å¥ = ×Ó°´Å¥("Íæ¼Ò4", ĞŞ¸ÄÍæ¼ÒÍ·Ïñ°´Å¥, ĞŞ¸ÄÍæ¼Ò4Í·Ïñ·½·¨)
-
-Íæ¼ÒĞÅÏ¢²éÑ¯ = ¸ù°´Å¥(240, 0, "Íæ¼ÒĞÅÏ¢²éÑ¯       ")
-Íæ¼Ò1ĞÅÏ¢²éÑ¯°´Å¥ = ×Ó°´Å¥("Íæ¼Ò1", Íæ¼ÒĞÅÏ¢²éÑ¯, Íæ¼Ò1ĞÅÏ¢²éÑ¯·½·¨)
-Íæ¼Ò2ĞÅÏ¢²éÑ¯°´Å¥ = ×Ó°´Å¥("Íæ¼Ò2", Íæ¼ÒĞÅÏ¢²éÑ¯, Íæ¼Ò2ĞÅÏ¢²éÑ¯·½·¨)
-Íæ¼Ò3ĞÅÏ¢²éÑ¯°´Å¥ = ×Ó°´Å¥("Íæ¼Ò3", Íæ¼ÒĞÅÏ¢²éÑ¯, Íæ¼Ò3ĞÅÏ¢²éÑ¯·½·¨)
-Íæ¼Ò4ĞÅÏ¢²éÑ¯°´Å¥ = ×Ó°´Å¥("Íæ¼Ò4", Íæ¼ÒĞÅÏ¢²éÑ¯, Íæ¼Ò4ĞÅÏ¢²éÑ¯·½·¨)
-
-µØ²úĞÅÏ¢²éÑ¯ = ¸ù°´Å¥(360, 0, "µØ²úĞÅÏ¢²éÑ¯       ")
-²éÑ¯¹ãÖİ = ×Ó°´Å¥("¹ãÖİ", µØ²úĞÅÏ¢²éÑ¯, ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨1)
-²éÑ¯Ïã¸Û = ×Ó°´Å¥("Ïã¸Û", µØ²úĞÅÏ¢²éÑ¯, ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨2)
-²éÑ¯ÉÏº£ = ×Ó°´Å¥("ÉÏº£", µØ²úĞÅÏ¢²éÑ¯, ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨3)
-²éÑ¯Å¦Ô¼ = ×Ó°´Å¥("Å¦Ô¼", µØ²úĞÅÏ¢²éÑ¯, ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨4)
-²éÑ¯±±¾© = ×Ó°´Å¥("±±¾©", µØ²úĞÅÏ¢²éÑ¯, ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨5)
-²éÑ¯Â×¶Ø = ×Ó°´Å¥("Â×¶Ø", µØ²úĞÅÏ¢²éÑ¯, ³ÇÊĞĞÅÏ¢²éÑ¯·½·¨6)
-
-°ïÖú = ¸ù°´Å¥(480, 0, "°ïÖú                  ")
-Í¼Àı°´Å¥ = ×Ó°´Å¥("Í¼Àı", °ïÖú, ÏÔÊ¾Í¼Àı)
-¸ü¶à²Ù×÷Ï¸½Ú°´Å¥ = ×Ó°´Å¥("¸ü¶à²Ù×÷Ï¸½Ú", °ïÖú, None)
-
-¸ü¶à°´Å¥ = ¸ù°´Å¥(600, 0, "¸ü¶à              ")
-¿ª·¢ÕßĞÅÏ¢°´Å¥ = ×Ó°´Å¥("¿ª·¢ÕßĞÅÏ¢", ¸ü¶à°´Å¥, ¿ª·¢ÕßĞÅÏ¢ÏÔÊ¾·½·¨)
-µØ¼Û = 500
-¹ıÂ··Ñ = 400
-global ÇøÓò
-ÆåÅÌx = 0  # ×óÉÏ×ø±êµÄÎ»ÖÃ
-ÆåÅÌy = 50
-ÇøÓò = [None]
-
-def ÇøÓò³õÊ¼»¯():  # ÓÃforÑ­»·¿ìËÙÍê³É26¸öÇøÓòµÄ»®·Ö
-    for _ in range(10):
-        ÇøÓò.append((ÆåÅÌx + _ * 120, ÆåÅÌy))
-    for _ in range(3):
-        ÇøÓò.append((ÆåÅÌx + 1080, ÆåÅÌy + _ * 120 + 120))
-    for _ in range(10):
-        ÇøÓò.append((ÆåÅÌx + 1080 - _ * 120, ÆåÅÌy + 480))
-    for _ in range(3):
-        ÇøÓò.append((ÆåÅÌx, ÆåÅÌy + 360 - _ * 120))
-
-ÇøÓò³õÊ¼»¯()
-
-global XX, YY
-XX = [0, 0, 0, 0, 0]
-YY = [0, 0, 0, 0, 0]
-XX[1] = ÇøÓò[1][0] + 1  # Ö®ºó¾Í¿ÉÒÔÓÃÏÂ±êµÄĞÎÊ½Ö±½ÓÈ¥µ½ÏàÓ¦ÇøÓò£¬ºÜ·½±ã
-YY[1] = ÇøÓò[1][1] + 1
-
-XX[2] = ÇøÓò[1][0] + 51
-YY[2] = ÇøÓò[1][1] + 1
-XX[3] = ÇøÓò[1][0] + 1
-YY[3] = ÇøÓò[1][1] + 51
-XX[4] = ÇøÓò[1][0] + 51
-YY[4] = ÇøÓò[1][1] + 51
-global stateall, state1, state2, state3, state4
-state1 = 1
-state2 = 1
-state3 = 1
-state4 = 1
-stateall = 0
-
-½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶ = [None, "ÓÎÏ·Í¼Æ¬/Àî¿­¶û.png", "ÓÎÏ·Í¼Æ¬/Ï²ÑòÑò.jpeg", "ÓÎÏ·Í¼Æ¬/ÌÀÄ·Ã¨.jpeg", "ÓÎÏ·Í¼Æ¬/ÂíÀï°Â.jpg"]
-
-
-def bubble_sort(arr):
-    start = time.time()
-    a = []
-    ÅÅĞòºóµÄË³Ğò = []
-    for _ in range(len(arr) - 1):
-        ÅÅĞòºóµÄË³Ğò.append(_ + 1)
-    for _ in arr:
-        a.append(_)
-    a.remove(a[0])
-    for i in range(len(a) - 1):  # ×¢ÒâÕâÀïÊÇlen-1
-        for j in range(len(a) - i - 1):
-            if a[j] < a[j + 1]:
-                a[j], a[j + 1] = a[j + 1], a[j]  # »¥»»
-                ÅÅĞòºóµÄË³Ğò[j], ÅÅĞòºóµÄË³Ğò[j + 1] = ÅÅĞòºóµÄË³Ğò[j + 1], ÅÅĞòºóµÄË³Ğò[j]  # ÕâÊÇ¸ö¶ÔÓ¦±í£¬¶ÔÓ¦Ã¿¸ö½ÇÉ«
-    end = time.time()
-    print(f'½øĞĞÒ»´ÎÅÅĞòĞèÒª{end - start}Ãë')
-    return ÅÅĞòºóµÄË³Ğò
-
-
-# coding=gbk
-def shellSort(arr, k, reverse=False):
-    a = []
-    ÅÅĞòºóµÄË³Ğò = []
-    for _ in range(len(arr) - 1):
-        ÅÅĞòºóµÄË³Ğò.append(_ + 1)
-    for _ in arr:
-        a.append(_)
-    a.remove(a[0])
-    length = len(a)
-    dk = k  # ÉèÖÃÒ»¸öÔöÁ¿dk
-    while dk > 0:
-        for i in range(dk, length):
-            temp = a[i]
-            j = i
-            while j >= dk and arr[j - dk] > temp:
-                a[j] = a[j - dk]
-                j -= dk
-            a[j] = temp
-        dk = int(dk / 2)
-    return a
-
-    if reverse == False:
-        print(a)
-    else:
-        a.reverse()
-        print(a)
-
-
+import threading
+import socket
+import json
+import single
+import function_
+#--------------------------------æ•°æ®å®šä¹‰------------------------------
 class city:
-    def __init__(self, name, location):
+    def __init__(self, name, location,åœ°ä»·):
         self.name = name
         self.state = 0
-        self.next = None  # nextÖ¸ÏòÏÂÒ»¸ö½áµã
+        self.next = None  # nextæŒ‡å‘ä¸‹ä¸€ä¸ªç»“ç‚¹
         self.number = 0
         self.location = location
-        cityList.add(self)  # ³õÊ¼»¯Ê±×Ô¶¯Ìí¼Óµ½ÁĞ±íÀï
-
-
-class citylist:
+        self.åœ°ä»·=åœ°ä»·
+class data:
     def __init__(self):
-        self.head = None  # Ïàµ±ÓÚcÓïÑÔÀïµÄÍ·Ö¸ÕëºÍÎ²Ö¸Õë
-        self.tail = None
+        self.location=[None,1,1,1,1,1,1]
+        self.money=[0,1200,1200,0,0]
+        self.ç ´äº§=[0,0,0,0,0]
+        self.id=1
 
-    def add(self, city):
-        if self.head == None:  # ĞÂÔö²Ù×÷£¬µ±Á´±íÎª¿Õ£¬Í·Î²Ö¸ÕëÖ¸ÏòÍ¬Ò»½áµã
-            self.head = city
-            self.tail = city
-        if self.head != None:
-            self.tail.next = city  # µ±Á´±íÒÑ¾­ÓĞÔªËØ£¬Í·Ö¸Õë²»¶¯£¬Î²Ö¸ÕëºóÒÆÖ¸ÏòĞÂÔªËØ
-            self.tail = city
+        self.ai=[]
+        self.å¼€å§‹é¡µé¢state=0
+        self.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„= [None, "æ¸¸æˆå›¾ç‰‡/æå‡¯å°”.png", "æ¸¸æˆå›¾ç‰‡/å–œç¾Šç¾Š.jpeg", "æ¸¸æˆå›¾ç‰‡/æ±¤å§†çŒ«.jpeg", "æ¸¸æˆå›¾ç‰‡/é©¬é‡Œå¥¥.jpg"]
+        self.ä¸»é¡µé¢çŠ¶æ€=1
+        self.å‡ äººæ¸¸æˆ=None
+        self.è½®åˆ°è°=0
+        self.ä¸»æŒ‰é’®å¼€å…³=False
+        self.å±•ç¤ºæ–‡å­—=""
+        self.citylst=[]
+        self.ç»“æŸ=0
+        self.citylst.append(city("å¹¿å·", 2, 500))
+        self.citylst.append(city("é¦™æ¸¯", 4, 400))
+        self.citylst.append(city("ä¸Šæµ·", 13, 450))
+        self.citylst.append(city("çº½çº¦", 15, 300))
+        self.citylst.append(city("åŒ—äº¬", 20, 350))
+        self.citylst.append(city("ä¼¦æ•¦", 26, 600))
+        self.newmessage=""
+data=data()
+#-------------------------------tkinteræ§ä»¶å°è£…-----------------------
+class å›¾ç‰‡æŒ‰é’®:
+    def __init__(å¼€å§‹é¡µé¢, è·¯å¾„, ä½ç½®, å¤§å°, æ–¹æ³•,*arg):
+        å¼€å§‹é¡µé¢.è·¯å¾„ = è·¯å¾„
+        å¼€å§‹é¡µé¢.ä½ç½® = ä½ç½®
+        å¼€å§‹é¡µé¢.å¤§å° = å¤§å°
+        å¼€å§‹é¡µé¢.lst = []
+        å¼€å§‹é¡µé¢.æ–¹æ ¼1a = Image.open(è·¯å¾„)  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+        å¼€å§‹é¡µé¢.æ–¹æ ¼1a = å¼€å§‹é¡µé¢.æ–¹æ ¼1a.resize((å¤§å°[0], å¤§å°[1]))  # è§„å®šå›¾ç‰‡å¤§å°
+        å¼€å§‹é¡µé¢.æ–¹æ ¼1b = ImageTk.PhotoImage(å¼€å§‹é¡µé¢.æ–¹æ ¼1a)
+        å¼€å§‹é¡µé¢.æ–¹æ ¼1c = tk.Button(image=å¼€å§‹é¡µé¢.æ–¹æ ¼1b, command=lambda: æ–¹æ³•(arg))
+        å¼€å§‹é¡µé¢.lst.append(å¼€å§‹é¡µé¢.æ–¹æ ¼1c)
+        å¼€å§‹é¡µé¢.lst[-1].place(x=ä½ç½®[0], y=ä½ç½®[1])
+import tkinter as tk
+from tkinter import scrolledtext
 
-    def println(self):
-        point = self.head
-        while point != None:
-            print(point.name)
-            point = point.next
+class SimpleChatRoom:
+    def __init__(self, root):
+        self.root = root
+        # self.root.title("ç®€å•èŠå¤©å®¤")
+        # self.root.geometry("400x300")  # è®¾ç½®çª—å£å¤§å°
 
-    def name_search(self, name):  # »ùÓÚÃû³ÆµÄ²éÕÒ
-        point = self.head  # ¶¨ÒåÒ»¸öÖ¸Õë£¬ÏÈÖ¸ÏòÍ·
-        t = 0
-        while point != None:  # Ö¸ÕëºóÒÆ£¬Æ¥Åä
-            if point.name == name:
-                break
-            t += 1
-            point = point.next  # Ö¸ÏòÏÂÒ»¸ö
-        if point == None:  # ÕÒ²»µ½
-            return 0
-        else:
-            return t
+        # èŠå¤©åŒºåŸŸ
+        self.chat_area = scrolledtext.ScrolledText(root, state="disabled", height=10, width=30)
+        self.chat_area.place(x=1220, y=400, width=380, height=200)  # ä½¿ç”¨ç»å¯¹åæ ‡
 
-    def location_search(self, location):  # »ùÓÚÎ»ÖÃµÄ²éÕÒ
-        point = self.head  # ¶¨ÒåÒ»¸öÖ¸Õë£¬ÏÈÖ¸ÏòÍ·
-        t = 0
-        while point != None:  # Ö¸ÕëºóÒÆ£¬Æ¥Åä
-            if point.location == location:
-                break
-            t += 1
-            point = point.next  # Ö¸ÏòÏÂÒ»¸ö
-        if point == None:  # ÕÒ²»µ½
-            return 0
-        else:
-            return t
+        # è¾“å…¥æ¡†
+        self.input_field = tk.Entry(root, width=30)
+        self.input_field.place(x=1220, y=600, width=280, height=30)  # ä½¿ç”¨ç»å¯¹åæ ‡
+        self.input_field.bind("<Return>", self.send_message)  # ç»‘å®šå›è½¦é”®å‘é€æ¶ˆæ¯
+
+        # å‘é€æŒ‰é’®
+        self.send_button = tk.Button(root, text="å‘é€", command=self.send_message)
+        self.send_button.place(x=1220, y=640, width=90, height=30)  # ä½¿ç”¨ç»å¯¹åæ ‡
+
+    def send_message(self, event=None):
+        message = self.input_field.get()
+
+        if message:
+            # self.display_message(message)
+            # self.input_field.delete(0, tk.END)  # æ¸…ç©ºè¾“å…¥æ¡†
+            print('message')
+            #æœåŠ¡å™¨ç«¯ï¼Œå¹¿æ’­
+            if data.id==1:
+                print('message send1')
+                app.update(message, data.id)
+                message={"0":"1","1":message,"2":data.id}
+                message=json.dumps(message)
+                broadcast(message,None)
+
+            if data.id!=1:
+                print('message send2')
+                message = {"0": "1", "1": message, "2": data.id}
+                message = json.dumps(message)
+                client_socket.send(message.encode('utf-8'))  # è¿™ä¸ªæ˜¯å¯¹åº”å‘é€æ•°æ®çš„
+        self.input_field.delete(0, tk.END)  # æ¸…ç©ºè¾“å…¥æ¡†
+    def display_message(self, message,ç”¨æˆ·i):
+        self.chat_area.config(state="normal")
+        self.chat_area.insert(tk.END, f"ç”¨æˆ·{ç”¨æˆ·i}: {message}\n")
+        self.chat_area.config(state="disabled")
+        self.chat_area.yview(tk.END)  # è‡ªåŠ¨æ»šåŠ¨åˆ°æœ€åº•éƒ¨
+    def update(self,message,ç”¨æˆ·i):
+        if message:
+            self.display_message(message,ç”¨æˆ·i)
+# -------------------------------è¿›å…¥é¡µé¢-------------------
+def å¼€å§‹æ¸¸æˆ(aistete):
+    aistete=aistete[0]
+    print('aistate',aistete)
+    å¼€å§‹é¡µé¢.destroy()
+    data.å¼€å§‹é¡µé¢state = 1
+    if aistete==0:                     #å•äººæ¸¸æˆï¼Œæ‰“3ä¸ªAI
+        data.ai=[0,0,1,1,1]
+        data.å‡ äººæ¸¸æˆ=1
+        single._main()   #å•äººæ¸¸æˆçš„è„šæœ¬
+        exit()
+
+    elif aistete==1:
+        data.å‡ äººæ¸¸æˆ=2
+
+def é€€å‡º(arg):
+    quit()
+
+å¼€å§‹é¡µé¢ = tk.Tk()
+å¼€å§‹é¡µé¢.geometry("500x600")
+
+å¼€å§‹é¡µé¢state = 0
+å¼€å§‹é¡µé¢.æ–¹æ ¼1a = Image.open("æ¸¸æˆå›¾ç‰‡/å¤§å¯Œç¿å°é¢.png")  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+å¼€å§‹é¡µé¢.æ–¹æ ¼1a = å¼€å§‹é¡µé¢.æ–¹æ ¼1a.resize((500, 600))  # è§„å®šå›¾ç‰‡å¤§å°
+å¼€å§‹é¡µé¢.æ–¹æ ¼1b = ImageTk.PhotoImage(å¼€å§‹é¡µé¢.æ–¹æ ¼1a)
+å¼€å§‹é¡µé¢.æ–¹æ ¼1c = ttk.Label(image=å¼€å§‹é¡µé¢.æ–¹æ ¼1b)
+å¼€å§‹é¡µé¢.æ–¹æ ¼1c.place(x=0, y=0)
+å¼€å§‹æ¸¸æˆæŒ‰é’®1 = å›¾ç‰‡æŒ‰é’®("æ¸¸æˆå›¾ç‰‡/å•äººæ¸¸æˆ.png", (50, 200), (120, 60), å¼€å§‹æ¸¸æˆ,0)
+å¼€å§‹æ¸¸æˆæŒ‰é’®2 = å›¾ç‰‡æŒ‰é’®("æ¸¸æˆå›¾ç‰‡/åŒäººæ¸¸æˆ.png", (50, 275), (120, 60), å¼€å§‹æ¸¸æˆ,1)
+# å¼€å§‹æ¸¸æˆæŒ‰é’®3 = å›¾ç‰‡æŒ‰é’®("æ¸¸æˆå›¾ç‰‡/å››äººæ¸¸æˆ.png", (50, 350), (120, 60), å¼€å§‹æ¸¸æˆ,2)
+é€€å‡ºæ¸¸æˆæŒ‰é’® = å›¾ç‰‡æŒ‰é’®("æ¸¸æˆå›¾ç‰‡/é€€å‡ºæ¸¸æˆ.png", (330, 350), (120, 60), é€€å‡º)
+å¼€å§‹é¡µé¢.mainloop()
+#---------------------------------------------------------------------------------
+#----------------------------------çº¿ç¨‹å‡½æ•°å®šä¹‰------------------------------------
+#---------------------------------  æœåŠ¡å™¨ç«¯--------------------------------------
+def handle_client(client_socket):
+    print('start')
+    while data.ä¸»é¡µé¢çŠ¶æ€==1 and data.ç»“æŸ==0:
+        print(11)
+        try:
+            msg = client_socket.recv(1024).decode('utf-8')
+            if msg:
+                print(f"Received: {msg}")
+
+                #------------------è¿™é‡Œå¯ä»¥è¿›è¡Œæ”¶åˆ°ä¿¡æ¯åçš„å¤„ç†---------------------------
 
 
-cityList = citylist()  # ÊµÀı»¯
-¹ãÖİ = city("¹ãÖİ", 2)
-Ïã¸Û = city("Ïã¸Û", 4)
-ÉÏº£ = city("ÉÏº£", 13)
-Å¦Ô¼ = city("Å¦Ô¼", 15)
-±±¾© = city("±±¾©", 20)
-Â×¶Ø = city("Â×¶Ø", 26)
-
-
-def ¸öÈËµØ²úÏÔÊ¾(i):
-    str = ""
-    point = cityList.head
-    while point != None:
-        if point.state == i:
-            str += point.name
-            str += ","
-        point = point.next
-    return str
-
-
-def ÆÆ²úÅĞ¶Ï():
-    global ÆÆ²ú, ÆÆ²úÈËÊı
-    a = 0
-    for x in range(1, 5):  # ¿´¿´ÓĞÃ»ÓĞÈËÇ®ÊÇ¸ºÊıµÄ
-        if money[x] < 0:  # x¼ÇÂ¼µÄÊÇÍæ¼ÒÊı
-            messagebox.showinfo("ÌáÊ¾", f"Íæ¼Ò{x}ÒÑÆÆ²ú")
-            money[x] = 0  # Ç®²ÆÇåÁã£¬²»È»ÏÂÒ»´Î»áÖØ¸´ÅĞ¶Ï
-            ÆÆ²ú[x] = 1
-            ÆÆ²úÈËÊı += 1
-            messagebox.showinfo("ÌáÊ¾", f"´ËÊ±ÆÆ²ú{ÆÆ²úÈËÊı}ÈË")
-            if ¹ãÖİ.state == x:
-                ¹ãÖİ.state = 0
-                messagebox.showinfo("ÌáÊ¾", "¹ãÖİµÄ·¿²ú³ä¹«")
-            if Ïã¸Û.state == x:
-                Ïã¸Û.state = 0
-                messagebox.showinfo("ÌáÊ¾", "Ïã¸ÛµÄ·¿²ú³ä¹«")
-            if ÉÏº£.state == x:
-                ÉÏº£.state = 0
-                messagebox.showinfo("ÌáÊ¾", "ÉÏº£µÄ·¿²ú³ä¹«")
-            if ÉÏº£.state == x:
-                ÉÏº£.state = 0
-                messagebox.showinfo("ÌáÊ¾", "Å¦Ô¼µÄ·¿²ú³ä¹«")
-            if Å¦Ô¼.state == x:
-                Å¦Ô¼.state = 0
-                messagebox.showinfo("ÌáÊ¾", "±±¾©µÄ·¿²ú³ä¹«")
-            if Â×¶Ø.state == x:
-                Â×¶Ø.state = 0
-                messagebox.showinfo("ÌáÊ¾", "Â×¶ØµÄ·¿²ú³ä¹«")
-            ½ÇÉ«[x - 1].Ïú»Ù()
-            Íæ¼ÒÊÂ¼ş[x].append(f"Íæ¼Ò{x}ÒÑÆÆ²ú")
-
-            if ÆÆ²úÈËÊı == 3:
-                for _ in range(5):
-                    if ÆÆ²ú[_] == 0:
-                        messagebox.showinfo("ÌáÊ¾", f"Íæ¼Ò{_}»ñÊ¤")
-                        root.destroy()
-
-def ÅĞ¶Ï(i,ai=None):  # ÕâÀïiÊÇÍæ¼Ò¼¸µÄÒâË¼,Ë÷Òı£¬ÅĞ¶ÏÅĞ¶Ï
-    def ³ÇÊĞ·½¸ñÅĞ¶Ï(·½¸ñ±àºÅ, i, city):
-        x×ó = ÇøÓò[·½¸ñ±àºÅ][0] + 1
-        xÓÒ = x×ó + 118
-        yÉÏ = ÇøÓò[·½¸ñ±àºÅ][1] + 1
-        yÏÂ = yÉÏ + 118
-        global money
-        if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-            if i == city.state:  # ½»×â
-                Íæ¼ÒÊÂ¼ş[i].append(f'µ½´ï·½¸ñ13£¬{city.name}£¬»¹Ê£{money[i]}Ôª')
-            if i != city.state and city.state != 0:
-                messagebox.showinfo("ÌáÊ¾", f"Äã{i}ĞèÒªÏòÍæ¼Ò{city.state}½»{¹ıÂ··Ñ}Ôª×÷Îª¹ıÂ··Ñ")
-                money[i] -= ¹ıÂ··Ñ
-                money[city.state] += ¹ıÂ··Ñ
-                Íæ¼ÒÊÂ¼ş[i].append(
-                    f'µ½´ï·½¸ñ{·½¸ñ±àºÅ}£¬{city.name}£¬ÏòÍæ¼Ò{city.state}½»{¹ıÂ··Ñ}Ôª¹ıÂ··Ñ,»¹Ê£{money[i]}Ôª')
-
-            if city.state == 0:  # ÂòµØ
-                if ai==None:
-                    ans = askokcancel("ÌáÊ¾", f"ÄãÒª»¨{µØ¼Û}ÔªÂòµØÂğ£¿")
-                else:
-                    ans=random.randint(0,1)
-                if ans:
-                    if money[i] >= µØ¼Û:
-                        messagebox.showinfo("ÌáÊ¾", "³É¹¦¹ºÂò")
-                        money[i] -= µØ¼Û
-
-                        city.state = i
-                        Íæ¼ÒÊÂ¼ş[i].append(f'µ½´ï·½¸ñ13£¬¹ºÂò{city.name},»¹Ê£{money[i]}Ôª')
-                    else:
-                        messagebox.showinfo("ÌáÊ¾", "Ç®²»¹»")
-                        Íæ¼ÒÊÂ¼ş[i].append(f'µ½´ï·½¸ñ{·½¸ñ±àºÅ},»¹Ê£{money[i]}Ôª')
-    def ·½¸ñÅĞ¶Ï(·½¸ñ±àºÅ, i, ·½¸ñĞ§¹û, ¸½¼ÓÎÄ×Ö=None, ²ÎÊı=None):  # iÊÇÈËÎï±àºÅ
-        global money
-        x×ó = ÇøÓò[·½¸ñ±àºÅ][0] + 1
-        xÓÒ = x×ó + 118
-        yÉÏ = ÇøÓò[·½¸ñ±àºÅ][1] + 1
-        yÏÂ = yÉÏ + 118
-
-        if ·½¸ñĞ§¹û == "Ôö¼õÇ®":
-            if ²ÎÊı > 0:
-                ·ûºÅ = '+'
+                #-----------------------------------------------------------
+                #-----------------ä¸‹é¢è¿™é‡Œåˆ™æ˜¯å°†æœ€æ–°ä¿¡æ¯å¹¿æ’­åˆ°å„ä¸ªæœåŠ¡å™¨
+                # broadcast(str(data.location), client_socket)
             else:
-                ·ûºÅ = ''
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                messagebox.showinfo("ÌáÊ¾", f"{¸½¼ÓÎÄ×Ö},{·ûºÅ}{²ÎÊı}Ôª")
-                money[i] = money[i] +²ÎÊı
-                Íæ¼ÒÊÂ¼ş[i].append(f"µ½·½¸ñ{·½¸ñ±àºÅ}£¬{¸½¼ÓÎÄ×Ö},{·ûºÅ}{²ÎÊı}Ôª£¬»¹Ê£{money[i]}Ôª")
-        if ·½¸ñĞ§¹û == "³ıÒÔ":
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                messagebox.showinfo("ÌáÊ¾", ¸½¼ÓÎÄ×Ö)
-                money[i] = money[i] / 2
-                Íæ¼ÒÊÂ¼ş[i].append(f"µ½·½¸ñ{·½¸ñ±àºÅ}£¬{¸½¼ÓÎÄ×Ö}£¬»¹Ê£{money[i]}Ôª")
+                remove(client_socket)
+                break
+        except:
+            continue
+        #------------------------------------------
+        data_decode(msg)
+        broadcast(msg, client_socket)
+        åŠ¨æ€åˆ·æ–°()
+    print('sercice_main_stop')
+def broadcast(message, client_socket):
+    for client in clients:
+        # if client != client_socket:
+            try:
+                client.send(message.encode('utf-8'))         #è¿™é‡Œæ˜¯å›æ˜¾ä¿¡æ¯
+            except:
+                remove(client)
 
-        if ·½¸ñĞ§¹û == "ÎŞÊÂ·¢Éú":
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                Íæ¼ÒÊÂ¼ş[i].append(f"µ½·½¸ñ{·½¸ñ±àºÅ}£¬{¸½¼ÓÎÄ×Ö}£¬»¹Ê£{money[i]}Ôª")
-        if ·½¸ñĞ§¹û=="¾Û²Æ":
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                t = 1
-                messagebox.showinfo("ÌáÊ¾", "ÆäËüÍæ¼Ò¶¼Òª¸øÄã100Ôª")
-                money[i] = money[i] + 100 * (4 - ÆÆ²úÈËÊı)
-                for _ in money[1:5]:
-                    if money[t] >= 0 and ÆÆ²ú[t] == 0:
-                        money[t] -= 100
-                    t += 1
-                Íæ¼ÒÊÂ¼ş[i].append(f"µ½´ï{·½¸ñ±àºÅ}£¬ÊÕÈ¡ÆäËüÍæ¼Ò¸÷100Ôª£¬»¹Ê£{money[i]}Ôª")
-                temp_llst=[0,1,2,3,4]
-                temp_llst[i]=0
-                for ii in temp_llst:
-                    if ii !=0:
-                        Íæ¼ÒÊÂ¼ş[ii].append(f"ÏòÍæ¼Ò{i}¸øÁË100Ôª£¬»¹Ê£{money[ii]}Ôª")
+def remove(connection):
+    if connection in clients:
+        clients.remove(connection)
 
-        if ·½¸ñĞ§¹û=="·¨Ôº":
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                Íæ¼ÒÊÂ¼ş[i].append(f"µ½´ï·½¸ñ{·½¸ñ±àºÅ}·¨Ôº")
-                t = 0
-                if ai==None:
-                    ans = askokcancel("·¨ÔºÌáÊ¾", "ÒªµÖÑºÂôµô·¿²ú»»ÏÖ½ğÂğ£¿")
-                else:
-                    ans=random.randint(0,1)
-                if ans:
-                    if ¹ãÖİ.state == i:
-                        t += 1
-                        if ai==None:
-                            ans1 = askokcancel("·¨ÔºÌáÊ¾", f"Òª°Ñ¹ãÖİµÄ·¿²úÂôÁËÂğ£¿")
-                        else:
-                            ans1 = random.randint(0, 1)
-                        if ans1:
-                            money[i] += µØ¼Û
-                            ¹ãÖİ.state = 0
-                            Íæ¼ÒÊÂ¼ş[i].append(f"ÂôÁË¹ãÖİ£¬»¹Ê£{money[i]}Ôª")
-                    if Ïã¸Û.state == i:
-                        t += 1
-                        if ai == None:
-                            ans1 = askokcancel("·¨ÔºÌáÊ¾", f"Òª°ÑÏã¸ÛµÄ·¿²úÂôÁËÂğ£¿")
-                        else:
-                            ans1 = random.randint(0, 1)
-                        if ans1:
-                            money[i] += µØ¼Û
-                            Ïã¸Û.state = 0
-                            Íæ¼ÒÊÂ¼ş[i].append(f"ÂôÁËÏã¸Û£¬»¹Ê£{money[i]}Ôª")
-                    if ÉÏº£.state == i:
-                        t += 1
-                        if ai == None:
-                            ans1 = askokcancel("·¨ÔºÌáÊ¾", f"Òª°ÑÉÏº£µÄ·¿²úÂôÁËÂğ£¿")
-                        else:
-                            ans1 = random.randint(0, 1)
-                        if ans1:
-                            money[i] += µØ¼Û
-                            ÉÏº£.state = 0
-                            Íæ¼ÒÊÂ¼ş[i].append(f"ÂôÁËÉÏº££¬»¹Ê£{money[i]}Ôª")
-                    if Å¦Ô¼.state == i:
-                        t += 1
-                        if ai == None:
-                            ans1 = askokcancel("·¨ÔºÌáÊ¾", f"Òª°ÑÅ¦Ô¼µÄ·¿²úÂôÁËÂğ£¿")
-                        else:
-                            ans1 = random.randint(0, 1)
-                        if ans1:
-                            money[i] += µØ¼Û
-                            Å¦Ô¼.state = 0
-                            Íæ¼ÒÊÂ¼ş[i].append(f"ÂôÁËÅ¦Ô¼£¬»¹Ê£{money[i]}Ôª")
-                    if ±±¾©.state == i:
-                        t += 1
-                        if ai == None:
-                            ans1 = askokcancel("·¨ÔºÌáÊ¾", f"Òª°Ñ±±¾©µÄ·¿²úÂôÁËÂğ£¿")
-                        else:
-                            ans1 = random.randint(0, 1)
-                        if ans1:
-                            money[i] += µØ¼Û
-                            ±±¾©.state = 0
-                            Íæ¼ÒÊÂ¼ş[i].append(f"ÂôÁË±±¾©£¬»¹Ê£{money[i]}Ôª")
-                    if Â×¶Ø.state == i:
-                        t += 1
-                        if ai == None:
-                            ans1 = askokcancel("·¨ÔºÌáÊ¾", f"Òª°ÑÂ×¶ØµÄ·¿²úÂôÁËÂğ£¿")
-                        else:
-                            ans1 = random.randint(0, 1)
-                        if ans1:
-                            money[i] += µØ¼Û
-                            Â×¶Ø.state = 0
-                            Íæ¼ÒÊÂ¼ş[i].append(f"ÂôÁËÂ×¶Ø£¬»¹Ê£{money[i]}Ôª")
-                    if t == 0:
-                        messagebox.showinfo("ÌáÊ¾", "ÄãÃ»ÓĞ·¿²ú")
-        if ·½¸ñĞ§¹û=="Ç°½ø":
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                y = np.random.randint(1, ²ÎÊı)
-                messagebox.showinfo("ÌáÊ¾", f"ÔÙÇ°½ø{y}¸ö¸ñ×Ó")
-                for _ in range(y):
-                    if i==1:
-                        Í¼Æ¬1_next()
-                    if i==2:
-                        Í¼Æ¬2_next()
-                    if i==3:
-                        Í¼Æ¬3_next()
-                    if i==4:
-                        Í¼Æ¬4_next()
-                Íæ¼ÒÊÂ¼ş[i].append(f"µ½´ï{¸½¼ÓÎÄ×Ö}£¬ÔÙÇ°½ø{y}¸ö¸ñ×Ó")
-        if ·½¸ñĞ§¹û=="½»»»Ç®²Æ":
-            max = 0
-            t = 0
-            t0 = 0
-            temp = 0
-            for _ in money:
-                if money[t] > max:
-                    max = money[t]
-                    t0 = t
-                t += 1
-            if x×ó <= XX[i] <= xÓÒ and yÉÏ <= YY[i] <= yÏÂ:
-                messagebox.showinfo("¹§Ï²", "ÄãÒ»Ò¹±©¸»")
-                messagebox.showinfo("ÌáÊ¾", f"Äã½«ºÍÍæ¼Ò{t0}½»»»Ç®²Æ")
-                temp = money[i]
-                money[i] = money[t0]
-                money[t0] = temp
-                Íæ¼ÒÊÂ¼ş[i].append(f'µ½´ï·½¸ñ{·½¸ñ±àºÅ}£¬ºÍÍæ¼Ò{t0}½»»»Ç®²Æ£¬»¹Ê£{money[i]}Ôª')
+def TCP_service_main():
+    while data.ä¸»é¡µé¢çŠ¶æ€==1 and data.ç»“æŸ==0:
+        print(22)
+        client_socket, addr = server.accept()
+        clients.append(client_socket)
+        print(f"Connection from {addr} has been established!")
+        æ–‡å­—1.æ›´æ–°("ç©å®¶å·²åŠ å…¥ï¼è¯·ç‚¹å‡»æŒ‰é’®ï¼Œä»ä½ å¼€å§‹ï¼")
+        data.è½®åˆ°è°=1
+        threading.Thread(target=handle_client, args=(client_socket,)).start()
+    print('sercice_main_stop')
+#---------------------------------  æœåŠ¡å™¨ç«¯--------------------------------------
+#--------------------------------å®¢æˆ·ç«¯------------------------
+def receive_messages(sock):
+    print("receive_start")
+    while data.ç»“æŸ==0:
+        # print(33)
+        try:
+            msg = sock.recv(2048).decode('utf-8')
+            if msg:
+                print(f"Broadcast Received: {msg}")
 
-    ·½¸ñÅĞ¶Ï(3, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="ÌıÑİ³ª»á", ²ÎÊı=-100)
-    ·½¸ñÅĞ¶Ï(5, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="µÃµ½ºì°ü", ²ÎÊı=100)
-    ·½¸ñÅĞ¶Ï(6, i, "³ıÒÔ", ¸½¼ÓÎÄ×Ö="Äã²ÎÓë¶Ä²©£¬Éí¼ÒÖ»Ê£Ò»°ë")
-    ·½¸ñÅĞ¶Ï(7, i, "ÎŞÊÂ·¢Éú", ¸½¼ÓÎÄ×Ö="¹«Ô°")
-    ·½¸ñÅĞ¶Ï(8,i,"·¨Ôº")
-    ·½¸ñÅĞ¶Ï(9,i,"¾Û²Æ")
-    ·½¸ñÅĞ¶Ï(10,i,"Ç°½ø",²ÎÊı=3,¸½¼ÓÎÄ×Ö="»ú³¡")
-    ·½¸ñÅĞ¶Ï(11, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="µÃµ½ºì°ü", ²ÎÊı=200)
-    ·½¸ñÅĞ¶Ï(12, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="±»µçĞÅÕ©Æ­", ²ÎÊı=-300)
-    ·½¸ñÅĞ¶Ï(14,i,"Ç°½ø",²ÎÊı=4,¸½¼ÓÎÄ×Ö="¸ßÌúÕ¾")
-    ·½¸ñÅĞ¶Ï(16, i, "½»»»Ç®²Æ")
-    ·½¸ñÅĞ¶Ï(17, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="µÃµ½ºì°ü", ²ÎÊı=200)
-    ·½¸ñÅĞ¶Ï(18, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="ÎóÈëÃå±±£¬ĞèÒª½»Ç®ÍÑÉí", ²ÎÊı=-300)
-    ·½¸ñÅĞ¶Ï(21, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="ÎÛÈ¾»·¾³£¬½»·£¿î", ²ÎÊı=-350)
-    ·½¸ñÅĞ¶Ï(22, i, "·¨Ôº")
-    ·½¸ñÅĞ¶Ï(23, i, "Ç°½ø", ²ÎÊı=2, ¸½¼ÓÎÄ×Ö="ÂëÍ·")
-    ·½¸ñÅĞ¶Ï(24, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="¿´ÇòÈü", ²ÎÊı=-150)
-    ·½¸ñÅĞ¶Ï(25, i, "Ôö¼õÇ®", ¸½¼ÓÎÄ×Ö="½¨ÒéÓÂÎª£¬½±Àø", ²ÎÊı=300)
-    ³ÇÊĞ·½¸ñÅĞ¶Ï(2, i, ¹ãÖİ)
-    ³ÇÊĞ·½¸ñÅĞ¶Ï(4, i, Ïã¸Û)
-    # 10ÓĞ
-    # ·½¸ñ13ÅĞ¶Ï(i)
-    ³ÇÊĞ·½¸ñÅĞ¶Ï(13, i, ÉÏº£)
-    # 14ÓĞ
-    ³ÇÊĞ·½¸ñÅĞ¶Ï(15, i, Å¦Ô¼)
-    # 19ÊÇ¹«Ô°
-    ³ÇÊĞ·½¸ñÅĞ¶Ï(20, i, ±±¾©)
-    ³ÇÊĞ·½¸ñÅĞ¶Ï(26, i, Â×¶Ø)
-    ÆÆ²úÅĞ¶Ï()
-    # end=time.time()
-    # print(f'Ö÷ÅĞ¶Ïº¯ÊıÖ´ĞĞÓÃÁË{end-start}Ãë')
+        except:
+            print("Error receiving messages")
+            break
+        # ---------------------è¿™é‡Œæ˜¯å¯¹æ¥æ”¶åˆ°çš„ä¿¡æ¯è¿›è¡Œå¤„ç†---------------------
+        data_decode(msg)
+        åŠ¨æ€åˆ·æ–°()
+        # -----------------------------------------------------------------
 
-class Í¼Æ¬:
-    def __init__(root, Â·¾¶, Î»ÖÃ, ´óĞ¡):
-        root.Â·¾¶ = Â·¾¶
-        root.Î»ÖÃ = Î»ÖÃ
-        root.´óĞ¡ = ´óĞ¡
+#-----------------------------------ä¸Šé¢æ˜¯å®¢æˆ·ç«¯-----------------------------
+
+
+def è®¡æ—¶():
+    count=10
+    while count>0:
+        æ–‡å­—1.æ›´æ–°(f"è½®åˆ°ä½ äº†,è¿˜å‰©{count}ç§’")
+        time.sleep(1)
+        count-=1
+        if data.è½®åˆ°è°!=data.id:
+            return
+
+#------------------------------------------ä¸»é¡µé¢éƒ¨åˆ†----------------------------------
+def åŠ¨æ€åˆ·æ–°():
+    if data.è½®åˆ°è°==0:
+        return
+    def ç®­å¤´åˆ·æ–°(i):
+        ç®­å¤´.replace(x=åŒºåŸŸ[i][0] + 25, y=åŒºåŸŸ[i][1] + 120)
+    è§’è‰²[1].replace(x=åŒºåŸŸ[data.location[1]][0],y=åŒºåŸŸ[data.location[1]][1])
+    è§’è‰²[2].replace(x=åŒºåŸŸ[data.location[2]][0]+50,y=åŒºåŸŸ[data.location[2]][1])
+    # è§’è‰²[3].replace(x=åŒºåŸŸ[data.location[3]][0],y=åŒºåŸŸ[data.location[3]][1]+50)
+    # è§’è‰²[4].replace(x=åŒºåŸŸ[data.location[4]][0]+50,y=åŒºåŸŸ[data.location[4]][1]+50)
+    print("data.è½®åˆ°è°",data.è½®åˆ°è°)
+    print("data.location",data.location)
+
+    ç®­å¤´åˆ·æ–°(data.location[data.è½®åˆ°è°])
+    if data.money[1]>=data.money[2]:
+        å¯Œè±ªæ¦œæ–‡å­—æ¸…å•[0].æ›´æ–°(f"NO.1ï¼šç©å®¶1\n èµ„é‡‘ï¼š{data.money[1]}")
+        å¯Œè±ªæ¦œæ–‡å­—æ¸…å•[1].æ›´æ–°(f"NO.2ï¼šç©å®¶2\n èµ„é‡‘ï¼š{data.money[2]}")
+        å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•[0].æ¢å›¾ç‰‡(1)
+        å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•[1].æ¢å›¾ç‰‡(2)
+    else:
+        å¯Œè±ªæ¦œæ–‡å­—æ¸…å•[0].æ›´æ–°(f"NO.1ï¼šç©å®¶2\n èµ„é‡‘ï¼š{data.money[2]}")
+        å¯Œè±ªæ¦œæ–‡å­—æ¸…å•[1].æ›´æ–°(f"NO.2ï¼šç©å®¶1\n èµ„é‡‘ï¼š{data.money[1]}")
+        å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•[0].æ¢å›¾ç‰‡(2)
+        å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•[1].æ¢å›¾ç‰‡(1)
+    if data.è½®åˆ°è°==data.id:
+        æ–‡å­—1.æ›´æ–°(f"è½®åˆ°ä½ äº†ï¼")
+    else:
+        æ–‡å­—1.æ›´æ–°(f"è½®åˆ°ç©å®¶{data.è½®åˆ°è°}")
+    åœ°äº§ä¿¡æ¯1.æ›´æ–°(data.å±•ç¤ºæ–‡å­—)
+    if data.è½®åˆ°è°==6:
+        æç¤ºå›¾ç‰‡1.æ¢å›¾ç‰‡(1)
+    else:
+        æç¤ºå›¾ç‰‡1.æ¢å›¾ç‰‡(data.è½®åˆ°è°)
+def data_encode():
+    dic={0:0,1:data.location[1],2:data.location[2],3:data.location[3],4:data.location[4],
+         5:data.money[1],6:data.money[2],7:data.money[3],8:data.money[4],9:data.è½®åˆ°è°,
+         10:data.citylst[0].state,11:data.citylst[1].state,
+         12:data.citylst[2].state,13:data.citylst[3].state,
+         14:data.citylst[4].state,15:data.citylst[5].state,16:data.å±•ç¤ºæ–‡å­—}
+    return  json.dumps(dic)   #è½¬ä¸ºå­—ç¬¦ä¸²
+def data_decode(dic_str):
+    dic_from_str = json.loads(dic_str)
+    if int(dic_from_str["0"])==0:                        #0è¡¨ç¤ºä¼ data
+        for i in range(1,5):
+            data.location[i]=dic_from_str[str(i)]
+        for i in range(5,9):
+            data.money[i-4]=dic_from_str[str(i)]
+        data.è½®åˆ°è°=int(dic_from_str["9"])
+        for i in range(10,16):
+            data.citylst[i-10].state=dic_from_str[str(i)]
+        data.å±•ç¤ºæ–‡å­—=dic_from_str["16"]
+    if int(dic_from_str["0"])==1:                 #ç”¨äºèŠå¤©æ¡†çš„é€šä¿¡
+        app.update(dic_from_str["1"],dic_from_str["2"])
+
+class å›¾ç‰‡:
+    def __init__(root, è·¯å¾„, ä½ç½®, å¤§å°):
+        root.è·¯å¾„ = è·¯å¾„
+        root.ä½ç½® = ä½ç½®
+        root.å¤§å° = å¤§å°
         root.lst = []
-        root.·½¸ñ1a = Image.open(Â·¾¶)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-        root.·½¸ñ1a = root.·½¸ñ1a.resize((´óĞ¡[0], ´óĞ¡[1]))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-        root.·½¸ñ1b = ImageTk.PhotoImage(root.·½¸ñ1a)
-        root.·½¸ñ1c = ttk.Label(image=root.·½¸ñ1b)
-        root.lst.append(root.·½¸ñ1c)
-        root.lst[-1].place(x=Î»ÖÃ[0], y=Î»ÖÃ[1])
+        root.æ–¹æ ¼1a = Image.open(è·¯å¾„)  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+        root.æ–¹æ ¼1a = root.æ–¹æ ¼1a.resize((å¤§å°[0], å¤§å°[1]))  # è§„å®šå›¾ç‰‡å¤§å°
+        root.æ–¹æ ¼1b = ImageTk.PhotoImage(root.æ–¹æ ¼1a)
+        root.æ–¹æ ¼1c = ttk.Label(image=root.æ–¹æ ¼1b)
+        root.lst.append(root.æ–¹æ ¼1c)
+        root.lst[-1].place(x=ä½ç½®[0], y=ä½ç½®[1])
 
-    def replace(root, ĞÂÎ»ÖÃ):
-        root.lst[-1].place(x=ĞÂÎ»ÖÃ[0], y=ĞÂÎ»ÖÃ[1])
-
-    def »»Í¼Æ¬(root, ĞòºÅ):
+    def replace(root, æ–°ä½ç½®):
+        root.lst[-1].place(x=æ–°ä½ç½®[0], y=æ–°ä½ç½®[1])
+    def replace(root, x,y):
+        root.lst[-1].place(x=x, y=y)
+    def æ¢å›¾ç‰‡(root, åºå·):
         root.lst[-1].destroy()
         root.lst.pop()
-        root.·½¸ñ1a = Image.open(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[ĞòºÅ])  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-        root.·½¸ñ1a = root.·½¸ñ1a.resize((root.´óĞ¡[0], root.´óĞ¡[1]))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-        root.·½¸ñ1b = ImageTk.PhotoImage(root.·½¸ñ1a)
-        root.·½¸ñ1c = ttk.Label(image=root.·½¸ñ1b)
-        root.lst.append(root.·½¸ñ1c)
-        root.lst[-1].place(x=root.Î»ÖÃ[0], y=root.Î»ÖÃ[1])
+        root.æ–¹æ ¼1a = Image.open(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[åºå·])  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+        root.æ–¹æ ¼1a = root.æ–¹æ ¼1a.resize((root.å¤§å°[0], root.å¤§å°[1]))  # è§„å®šå›¾ç‰‡å¤§å°
+        root.æ–¹æ ¼1b = ImageTk.PhotoImage(root.æ–¹æ ¼1a)
+        root.æ–¹æ ¼1c = ttk.Label(image=root.æ–¹æ ¼1b)
+        root.lst.append(root.æ–¹æ ¼1c)
+        root.lst[-1].place(x=root.ä½ç½®[0], y=root.ä½ç½®[1])
 
-    def ´«ÈëĞÂÂ·¾¶(root, Â·¾¶, i):
+    def ä¼ å…¥æ–°è·¯å¾„(root, è·¯å¾„, i):
         root.lst[-1].destroy()
         root.lst.pop()
-        root.·½¸ñ1a = Image.open(Â·¾¶)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-        root.·½¸ñ1a = root.·½¸ñ1a.resize((root.´óĞ¡[0], root.´óĞ¡[1]))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-        root.·½¸ñ1b = ImageTk.PhotoImage(root.·½¸ñ1a)
-        root.·½¸ñ1c = ttk.Label(image=root.·½¸ñ1b)
-        root.lst.append(root.·½¸ñ1c)
+        root.æ–¹æ ¼1a = Image.open(è·¯å¾„)  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+        root.æ–¹æ ¼1a = root.æ–¹æ ¼1a.resize((root.å¤§å°[0], root.å¤§å°[1]))  # è§„å®šå›¾ç‰‡å¤§å°
+        root.æ–¹æ ¼1b = ImageTk.PhotoImage(root.æ–¹æ ¼1a)
+        root.æ–¹æ ¼1c = ttk.Label(image=root.æ–¹æ ¼1b)
+        root.lst.append(root.æ–¹æ ¼1c)
         if i == 1:
             root.lst[-1].place(x=XX[1], y=YY[1])
         if i == 2:
@@ -899,340 +327,375 @@ class Í¼Æ¬:
         if i == 4:
             root.lst[-1].place(x=XX[4], y=YY[4])
 
-    def Ïú»Ù(root):
+    def é”€æ¯(root):
         root.lst[-1].destroy()
 
+class å›¾ç‰‡2:
+    def __init__(root, è·¯å¾„, ä½ç½®):
+        root.è·¯å¾„ = è·¯å¾„
+        root.ä½ç½® = ä½ç½®
+        if è·¯å¾„ != None:
+            root.æ–¹æ ¼1a = Image.open(è·¯å¾„)  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+            root.æ–¹æ ¼1a = root.æ–¹æ ¼1a.resize((110, 110))  # è§„å®šå›¾ç‰‡å¤§å°
+            root.æ–¹æ ¼1b = ImageTk.PhotoImage(root.æ–¹æ ¼1a)
+            root.æ–¹æ ¼1c = ttk.Label(image=root.æ–¹æ ¼1b)
+            root.æ–¹æ ¼1c.place(x=åŒºåŸŸ[ä½ç½®][0] + 5, y=åŒºåŸŸ[ä½ç½®][1] + 5)  # æ­¤ä½ç½®å°±æ˜¯åŒºåŸŸçš„ç¼–å·
+        if è·¯å¾„ == None:
+            root.æ–‡å­— = tk.Label(text=ä½ç½®, font=12)
+            root.æ–‡å­—.place(x=åŒºåŸŸ[ä½ç½®][0] + 50, y=åŒºåŸŸ[ä½ç½®][1] + 50)
+        w1.create_line(åŒºåŸŸ[ä½ç½®][0], åŒºåŸŸ[ä½ç½®][1], åŒºåŸŸ[ä½ç½®][0] + 120, åŒºåŸŸ[ä½ç½®][1], width=5)
+        w1.create_line(åŒºåŸŸ[ä½ç½®][0], åŒºåŸŸ[ä½ç½®][1], åŒºåŸŸ[ä½ç½®][0], åŒºåŸŸ[ä½ç½®][1] + 120, width=5)
+        w1.create_line(åŒºåŸŸ[ä½ç½®][0] + 120, åŒºåŸŸ[ä½ç½®][1], åŒºåŸŸ[ä½ç½®][0] + 120, åŒºåŸŸ[ä½ç½®][1] + 120, width=5)
+        w1.create_line(åŒºåŸŸ[ä½ç½®][0], åŒºåŸŸ[ä½ç½®][1] + 120, åŒºåŸŸ[ä½ç½®][0] + 120, åŒºåŸŸ[ä½ç½®][1] + 120, width=5)
+class æ–‡å­—:
+    def __init__(root, ä½ç½®, å­—å·, å†…å®¹):
+        root.ä½ç½® = ä½ç½®
+        root.å­—å· = å­—å·
+        root.å†…å®¹ = å†…å®¹
+        root.æ–‡å­— = tk.Label(text=å†…å®¹, font=å­—å·)
+        root.æ–‡å­—.place(x=ä½ç½®[0], y=ä½ç½®[1])
 
-def ¼ıÍ·Ë¢ĞÂ(i):
-    ¼ıÍ·.replace((ÇøÓò[i][0] + 25, ÇøÓò[i][1] + 120))
+    def æ›´æ–°(root, å†…å®¹):
+        # root.æ–‡å­—.destroy()
+        # root.æ–‡å­— = tk.Label(text=å†…å®¹, font=root.å­—å·)
+        # root.æ–‡å­—.place(x=root.ä½ç½®[0], y=root.ä½ç½®[1])
+        root.æ–‡å­—.config(text=å†…å®¹)
 
-class Í¼Æ¬°´Å¥:
-    def __init__(root, Â·¾¶, Î»ÖÃ, ´óĞ¡, ·½·¨):
-        root.Â·¾¶ = Â·¾¶
-        root.Î»ÖÃ = Î»ÖÃ
-        root.´óĞ¡ = ´óĞ¡
-        root.lst = []
-        root.·½¸ñ1a = Image.open(Â·¾¶)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-        root.·½¸ñ1a = root.·½¸ñ1a.resize((´óĞ¡[0], ´óĞ¡[1]))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-        root.·½¸ñ1b = ImageTk.PhotoImage(root.·½¸ñ1a)
-        root.·½¸ñ1c = tk.Button(image=root.·½¸ñ1b, command=·½·¨)
-        root.lst.append(root.·½¸ñ1c)
-        root.lst[-1].place(x=Î»ÖÃ[0], y=Î»ÖÃ[1])
+def ç ´äº§åˆ¤æ–­():
+    for x in range(1, 5):  # çœ‹çœ‹æœ‰æ²¡æœ‰äººé’±æ˜¯è´Ÿæ•°çš„
+        if data.money[x] < 0:  # xè®°å½•çš„æ˜¯ç©å®¶æ•°
+            messagebox.showinfo("æç¤º", f"ç©å®¶{x}å·²ç ´äº§")
+            data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{x}å·²ç ´äº§"
+            data.money[x] = 0  # é’±è´¢æ¸…é›¶ï¼Œä¸ç„¶ä¸‹ä¸€æ¬¡ä¼šé‡å¤åˆ¤æ–­
+            data.ç ´äº§[x] = 1
 
-class Í¼Æ¬2:
-    def __init__(root, Â·¾¶, Î»ÖÃ):
-        root.Â·¾¶ = Â·¾¶
-        root.Î»ÖÃ = Î»ÖÃ
-        if Â·¾¶ != None:
-            root.·½¸ñ1a = Image.open(Â·¾¶)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-            root.·½¸ñ1a = root.·½¸ñ1a.resize((110, 110))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-            root.·½¸ñ1b = ImageTk.PhotoImage(root.·½¸ñ1a)
-            root.·½¸ñ1c = ttk.Label(image=root.·½¸ñ1b)
-            root.·½¸ñ1c.place(x=ÇøÓò[Î»ÖÃ][0] + 5, y=ÇøÓò[Î»ÖÃ][1] + 5)  # ´ËÎ»ÖÃ¾ÍÊÇÇøÓòµÄ±àºÅ
-        if Â·¾¶ == None:
-            root.ÎÄ×Ö = tk.Label(text=Î»ÖÃ, font=12)
-            root.ÎÄ×Ö.place(x=ÇøÓò[Î»ÖÃ][0] + 50, y=ÇøÓò[Î»ÖÃ][1] + 50)
-        w1.create_line(ÇøÓò[Î»ÖÃ][0], ÇøÓò[Î»ÖÃ][1], ÇøÓò[Î»ÖÃ][0] + 120, ÇøÓò[Î»ÖÃ][1], width=5)
-        w1.create_line(ÇøÓò[Î»ÖÃ][0], ÇøÓò[Î»ÖÃ][1], ÇøÓò[Î»ÖÃ][0], ÇøÓò[Î»ÖÃ][1] + 120, width=5)
-        w1.create_line(ÇøÓò[Î»ÖÃ][0] + 120, ÇøÓò[Î»ÖÃ][1], ÇøÓò[Î»ÖÃ][0] + 120, ÇøÓò[Î»ÖÃ][1] + 120, width=5)
-        w1.create_line(ÇøÓò[Î»ÖÃ][0], ÇøÓò[Î»ÖÃ][1] + 120, ÇøÓò[Î»ÖÃ][0] + 120, ÇøÓò[Î»ÖÃ][1] + 120, width=5)
+            for ci in data.citylst:
+                if ci.state == x:
+                    ci.state = 0
+                    messagebox.showinfo("æç¤º", f"{ci.name}çš„æˆ¿äº§å……å…¬")
 
+            # è§’è‰²[x].é”€æ¯()
+            print("lendata(pochan)",len(data.ç ´äº§))
+            if sum(data.ç ´äº§) == 1:
+                for _ in range(1,3):
+                    if data.ç ´äº§[_] == 0:
+                        messagebox.showinfo("æç¤º", )
+                        data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{_}è·èƒœ"
+                        data.è½®åˆ°è°=5
+                        # root.destroy()
 
-class ÎÄ×Ö:
-    def __init__(root, Î»ÖÃ, ×ÖºÅ, ÄÚÈİ):
-        root.Î»ÖÃ = Î»ÖÃ
-        root.×ÖºÅ = ×ÖºÅ
-        root.ÄÚÈİ = ÄÚÈİ
-        root.ÎÄ×Ö = tk.Label(text=ÄÚÈİ, font=×ÖºÅ)
-        root.ÎÄ×Ö.place(x=Î»ÖÃ[0], y=Î»ÖÃ[1])
-
-    def ¸üĞÂ(root, ÄÚÈİ):
-        root.ÎÄ×Ö.destroy()
-        root.ÎÄ×Ö = tk.Label(text=ÄÚÈİ, font=root.×ÖºÅ)
-        root.ÎÄ×Ö.place(x=root.Î»ÖÃ[0], y=root.Î»ÖÃ[1])
-
-
-class ¹ö¶¯¿Ø¼ş:
-    def __init__(self, lst):
-        ¹ö¶¯ÌõÒ³Ãæ = tk.Tk()
-        # bttrt=tk.Button(¹ö¶¯ÌõÒ³Ãæ)   #Ä£·ÂÕâ¸ö°Ñ¹ö¶¯Ìõ¼Óµ½ÀïÃæÈ¥
-        # bttrt.pack()
-
-        self.scrollbar_v = Scrollbar(¹ö¶¯ÌõÒ³Ãæ)
-        self.scrollbar_v.pack(side=RIGHT, fill=Y)  # ÓÒ¹ö¶¯Ìõ
-        self.scrollbar_h = Scrollbar(¹ö¶¯ÌõÒ³Ãæ, orient=HORIZONTAL)  # Ë®Æ½¹ö¶¯Ìõ
-        self.scrollbar_h.pack(side=BOTTOM, fill=X)
-        self.text = Text(¹ö¶¯ÌõÒ³Ãæ, width=40, height=40)
-        self.text.config(yscrollcommand=self.scrollbar_v.set)  # text°ó¶¨´¹Ö±¹ö¶¯Ìõ
-        self.text.config(xscrollcommand=self.scrollbar_h.set)  # text°ó¶¨Ë®Æ½¹ö¶¯Ìõ
-        self.text.pack(expand=YES, fill=BOTH)
-
-        for i in range(len(lst)):
-            self.text.insert("end", lst[i] + "\n")
-
-        self.scrollbar_v.config(command=self.text.yview)  # ´¹Ö±¹ö¶¯Ìõ°ó¶¨text
-        self.scrollbar_h.config(command=self.text.xview)  # Ë®Æ½¹ö¶¯Ìõ°ó¶¨text
-
-
-# ¹ö¶¯Ìõ×Ó=¹ö¶¯¿Ø¼ş()
-# ·½¸ñ25=Í¼Æ¬("ÓÎÏ·Í¼Æ¬/¼ûÒåÓÂÎª£¬½±Àø300Ôª.png",(3,243))
-·½¸ñ1 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Æğµã.png", 1)
-·½¸ñ2 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/¹ãÖİ.png", 2)
-·½¸ñ3 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Ñİ³ª»á.png", 3)
-·½¸ñ4 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Ïã¸Û.png", 4)
-·½¸ñ5 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/200ºì°ü.png", 5)
-·½¸ñ6 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/¶Ä²©ÏÖ½ğ¼õ°ë.png", 6)
-·½¸ñ7 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/¹«Ô°1.png", 7)
-·½¸ñ8 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/·¨Ôº.png", 8)
-·½¸ñ9 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/½»Ò×Ëù.png", 9)
-·½¸ñ10 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/·É»ú.png", 10)
-·½¸ñ11 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/200ºì°ü.png", 11)
-·½¸ñ12 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/µçĞÅÕ©Æ­.png", 12)
-·½¸ñ13 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/ÉÏº£.png", 13)
-·½¸ñ14 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/¸ßÌú.jpg", 14)
-·½¸ñ15 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Å¦Ô¼.png", 15)
-·½¸ñ16 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Ò»Ò¹±©¸».png", 16)
-·½¸ñ17 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/200ºì°ü.png", 17)
-·½¸ñ18 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Ãå±±.png", 18)
-·½¸ñ19 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/¹«Ô°2.png", 19)
-·½¸ñ20 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/±±¾©.png", 20)
-·½¸ñ21 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/»·¾³ÎÛÈ¾·£¿î.png", 21)  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-·½¸ñ22 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/·¨Ôº.png", 22)
-·½¸ñ23 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/ÂÖ´¬.jpg", 23)
-·½¸ñ24 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/2018.png", 24)
-·½¸ñ25 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/¼ûÒåÓÂÎª£¬½±Àø300Ôª.png", 25)
-·½¸ñ26 = Í¼Æ¬2("ÓÎÏ·Í¼Æ¬/Â×¶Ø.png", 26)
-
-¼ıÍ· = Í¼Æ¬("ÓÎÏ·Í¼Æ¬/ÏòÉÏ¼ıÍ·.png", (ÇøÓò[1][0], ÇøÓò[1][1] + 120), (35, 35))
-ÌáÊ¾Í¼Æ¬1 = Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[1], (ÇøÓò[3][0], ÇøÓò[3][1] + 240), (125, 125))
-ÎÄ×Ö1 = ÎÄ×Ö((ÇøÓò[3][0], ÇøÓò[3][1] + 160), 32, "ÏÖÔÚÂÖµ½Íæ¼Ò1")
-Òıµ¼Í¼Æ¬1 = Í¼Æ¬(r"ÓÎÏ·Í¼Æ¬\Òıµ¼Í¼Æ¬1.png", (ÇøÓò[6][0], ÇøÓò[6][1] + 120),
-                 (125, 230))
-²Ù×÷¹æÔòÍ¼Æ¬ = Í¼Æ¬(r"ÓÎÏ·Í¼Æ¬\Òıµ¼ÎÄ×Ö.png",
-                    (ÇøÓò[7][0] + 10, ÇøÓò[7][1] + 120), (300, 230))
-½ğÇ®ĞÅÏ¢1 = ÎÄ×Ö((ÇøÓò[4][0] + 10, ÇøÓò[4][1] + 260), 32, "Íæ¼Ò1µÄ×Ê½ğÎª£º1200")
-µØ²úĞÅÏ¢1 = ÎÄ×Ö((ÇøÓò[4][0] + 10, ÇøÓò[4][1] + 290), 32, "Íæ¼Ò1µÄµØ²úÓĞ\n")
-µØ²úĞÅÏ¢2 = ÎÄ×Ö((ÇøÓò[4][0] + 10, ÇøÓò[4][1] + 330), 32, "")
-¸»ºÀ°ñÎÄ×Ö = ÎÄ×Ö((ÇøÓò[13][0] + 120, 0), 32, "ÊµÊ±¸»ºÀ°ñ")
-¸»ºÀ°ñÎÄ×ÖÇåµ¥ = []
-¸»ºÀ°ñÍ¼Æ¬Çåµ¥ = []
-¸»ºÀ°ñÎÄ×ÖÇåµ¥.append(ÎÄ×Ö((¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0], ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 75), 32, "NO.1£ºÍæ¼Ò1\n ×Ê½ğ£º1200"))
-¸»ºÀ°ñÍ¼Æ¬Çåµ¥.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[1], (¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0] + 180, ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 75), (50, 50)))
-¸»ºÀ°ñÎÄ×ÖÇåµ¥.append(ÎÄ×Ö((¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0], ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 200), 32, "NO.2£ºÍæ¼Ò2\n ×Ê½ğ: 1200"))
-¸»ºÀ°ñÍ¼Æ¬Çåµ¥.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[2], (¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0] + 180, ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 200), (50, 50)))
-
-¸»ºÀ°ñÎÄ×ÖÇåµ¥.append(ÎÄ×Ö((¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0], ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 325), 32, "NO.3:Íæ¼Ò3\n ×Ê½ğ:1200"))
-¸»ºÀ°ñÍ¼Æ¬Çåµ¥.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[3], (¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0] + 180, ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 325), (50, 50)))
-
-¸»ºÀ°ñÎÄ×ÖÇåµ¥.append(ÎÄ×Ö((¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0], ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 450), 32, "NO.4:Íæ¼Ò4\n ×Ê½ğ:1200"))
-¸»ºÀ°ñÍ¼Æ¬Çåµ¥.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[4], (¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[0] + 180, ¸»ºÀ°ñÎÄ×Ö.Î»ÖÃ[1] + 450), (50, 50)))
+def åˆ¤æ–­(i,data,ai=None):  # è¿™é‡Œiæ˜¯ç©å®¶å‡ çš„æ„æ€,ç´¢å¼•ï¼Œåˆ¤æ–­åˆ¤æ–­
+    def åŸå¸‚æ–¹æ ¼åˆ¤æ–­(æ–¹æ ¼ç¼–å·, i, city):
+        if data.location[i]==æ–¹æ ¼ç¼–å·:
+            print('city.state=',city.state,"   i=",i)
+            if i != city.state and city.state != 0:     #äº¤ç§Ÿ
+                è¿‡è·¯è´¹=city.åœ°ä»·//3
+                messagebox.showinfo("æç¤º", f"ç©å®¶{i}éœ€è¦å‘ç©å®¶{city.state}äº¤{è¿‡è·¯è´¹}å…ƒä½œä¸ºè¿‡è·¯è´¹")
+                data.money[i] -= è¿‡è·¯è´¹
+                data.money[city.state] += è¿‡è·¯è´¹
+                data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{i}éœ€è¦å‘ç©å®¶{city.state}äº¤{è¿‡è·¯è´¹}å…ƒä½œä¸ºè¿‡è·¯è´¹"
+            if city.state == 0:  # ä¹°åœ°
+                if ai==None:
+                    ans = askokcancel("æç¤º", f"ä½ è¦èŠ±{city.åœ°ä»·}å…ƒä¹°åœ°å—ï¼Ÿ")
+                else:
+                    ans=random.randint(0,1)
+                if ans:
+                    if data.money[i] >= city.åœ°ä»·:
+                        messagebox.showinfo("æç¤º", "æˆåŠŸè´­ä¹°")
+                        data.money[i] -= city.åœ°ä»·
+                        city.state = i
+                        data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{i}è´­ä¹°äº†åœŸåœ°{city.name}"
+                    else:
+                        messagebox.showinfo("æç¤º", "é’±ä¸å¤Ÿ")
 
 
-def ÎÄ×ÖË¢ĞÂ(i):
-    ÎÄ×Ö1.¸üĞÂ(f"ÏÖÔÚÂÖµ½Íæ¼Ò{i}")
-    if ÆÆ²ú[i] == 1:
-        ÎÄ×Ö1.¸üĞÂ(f"ÏÖÔÚÂÖµ½Íæ¼Ò{i}(ÒÑÆÆ²ú£©")
-    ½ğÇ®ĞÅÏ¢1.¸üĞÂ(f"Íæ¼Ò{i}µÄ×Ê½ğÎª:{money[i]}")
-    µØ²úĞÅÏ¢1.¸üĞÂ(f"Íæ¼Ò{i}µÄµØ²úÓĞ:")
-    µØ²úĞÅÏ¢2.¸üĞÂ(¸öÈËµØ²úÏÔÊ¾(i))
+    def æ–¹æ ¼åˆ¤æ–­(æ–¹æ ¼ç¼–å·, i, æ–¹æ ¼æ•ˆæœ, é™„åŠ æ–‡å­—=None, å‚æ•°=None):  # iæ˜¯äººç‰©ç¼–å·
 
-def ¸»ºÀ°ñ¸üĞÂ():
-    ÅÅĞĞ = bubble_sort(money)
-    for _ in range(len(ÅÅĞĞ)):
-        ¸»ºÀ°ñÎÄ×ÖÇåµ¥[_].¸üĞÂ(f"No.{_ + 1}:Íæ¼Ò{ÅÅĞĞ[_]}\n ×Ê½ğ: {money[ÅÅĞĞ[_]]}")
-        ¸»ºÀ°ñÍ¼Æ¬Çåµ¥[_].»»Í¼Æ¬(ÅÅĞĞ[_])
+        if æ–¹æ ¼æ•ˆæœ == "å¢å‡é’±":
+            if å‚æ•° > 0:
+                ç¬¦å· = '+'
+            else:
+                ç¬¦å· = ''
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                messagebox.showinfo("æç¤º", f"{é™„åŠ æ–‡å­—},{ç¬¦å·}{å‚æ•°}å…ƒ")
+                data.money[i] = data.money[i] +å‚æ•°
+                data.å±•ç¤ºæ–‡å­— = f"ç©å®¶{i}{é™„åŠ æ–‡å­—},{ç¬¦å·}{å‚æ•°}å…ƒ"
+        if æ–¹æ ¼æ•ˆæœ == "é™¤ä»¥":
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                messagebox.showinfo("æç¤º", é™„åŠ æ–‡å­—)
+                data.money[i] = data.money[i] // 2
+                data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{i}{é™„åŠ æ–‡å­—}"
+
+        if æ–¹æ ¼æ•ˆæœ == "æ— äº‹å‘ç”Ÿ":
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                   data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{i}æ— äº‹å‘ç”Ÿ"
+        if æ–¹æ ¼æ•ˆæœ=="èšè´¢":
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                t = 1
+                messagebox.showinfo("æç¤º", "å…¶å®ƒç©å®¶éƒ½è¦ç»™ä½ 100å…ƒ")
+                data.money[i] = data.money[i] + 100 * (4 - len(data.ç ´äº§))
+                for _ in data.money[1:3]:
+                    if data.money[t] >= 0 and data.ç ´äº§[t] == 0:
+                        data.money[t] -= 100
+                    t += 1
+                data.å±•ç¤ºæ–‡å­—=f"å…¶å®ƒç©å®¶éƒ½è¦ç»™ç©å®¶{i}  100å…ƒ"
+
+        if æ–¹æ ¼æ•ˆæœ=="æ³•é™¢":
+            strr=[]
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                t = 0
+                if ai==None:
+                    ans = askokcancel("æ³•é™¢æç¤º", "è¦æŠµæŠ¼å–æ‰æˆ¿äº§æ¢ç°é‡‘å—ï¼Ÿ")
+                else:
+                    ans=random.randint(0,1)
+                if ans:
+                    for ci in data.citylst:
+                        if ci.state == i:
+                            t += 1
+                            if ai==None:
+                                ans1 = askokcancel("æ³•é™¢æç¤º", f"è¦æŠŠ{ci.name}çš„æˆ¿äº§å–äº†å—ï¼Ÿ")
+                            else:
+                                ans1 = random.randint(0, 1)
+                            if ans1:
+                                data.money[i] += ci.åœ°ä»·
+                                ci.state = 0
+                                strr.append(ci.name)
+                    if t == 0:
+                        messagebox.showinfo("æç¤º", "ä½ æ²¡æœ‰æˆ¿äº§")
+                    if len(strr)==0:
+                        data.å±•ç¤ºæ–‡å­—=f"ç©å®¶{i}ç»è¿‡æ³•é™¢ï¼Œæ²¡æœ‰å˜å–åœŸåœ°"
+                    else:
+                        data.å±•ç¤ºæ–‡å­— = f"ç©å®¶{i}ç»è¿‡æ³•é™¢ï¼Œå˜å–äº†{[name for name in strr]}"
+                if not ans:
+                    data.å±•ç¤ºæ–‡å­— = f"ç©å®¶{i}ç»è¿‡æ³•é™¢ï¼Œæ²¡æœ‰å˜å–åœŸåœ°"
+        if æ–¹æ ¼æ•ˆæœ=="å‰è¿›":
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                y = np.random.randint(1, å‚æ•°)
+                messagebox.showinfo("æç¤º", f"å†å‰è¿›{y}ä¸ªæ ¼å­")
+                data.location[i]+=y
+                if data.location[i]>26:
+                    data.location[i]-=26
+
+        if æ–¹æ ¼æ•ˆæœ=="äº¤æ¢é’±è´¢":
+            max = 0
+            t = 0
+            t0 = 0
+            temp = 0
+            for _ in data.money[:3]:
+                if data.money[t] > max:
+                    max = data.money[t]
+                    t0 = t
+                t += 1
+            if data.location[i]==æ–¹æ ¼ç¼–å·:
+                messagebox.showinfo("æ­å–œ", "ä½ ä¸€å¤œæš´å¯Œ")
+                messagebox.showinfo("æç¤º", f"ä½ å°†å’Œç©å®¶{t0}äº¤æ¢é’±è´¢")
+                data.å±•ç¤ºæ–‡å­— = f"ç©å®¶{i}å’Œç©å®¶{t0}äº¤æ¢é’±è´¢"
+                temp = data.money[i]
+                data.money[i] = data.money[t0]
+                data.money[t0] = temp
 
 
-½ÇÉ« = []
-½ÇÉ«.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[1], (XX[1], YY[1]), (47, 47)));
-½ÇÉ«.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[2], (XX[2], YY[2]), (47, 47)));
-½ÇÉ«.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[3], (XX[3], YY[3]), (47, 47)));
-½ÇÉ«.append(Í¼Æ¬(½ÇÉ«Í¼Æ¬ÎÄ¼şÂ·¾¶[4], (XX[4], YY[4]), (47, 47)))
+    æ–¹æ ¼åˆ¤æ–­(3, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="å¬æ¼”å”±ä¼š", å‚æ•°=-100)
+    æ–¹æ ¼åˆ¤æ–­(5, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="å¾—åˆ°çº¢åŒ…", å‚æ•°=100)
+    æ–¹æ ¼åˆ¤æ–­(6, i, "é™¤ä»¥", é™„åŠ æ–‡å­—="å‚ä¸èµŒåšï¼Œèº«å®¶åªå‰©ä¸€åŠ")
+    æ–¹æ ¼åˆ¤æ–­(7, i, "æ— äº‹å‘ç”Ÿ", é™„åŠ æ–‡å­—="å…¬å›­")
+    æ–¹æ ¼åˆ¤æ–­(8,i,"æ³•é™¢")
+    æ–¹æ ¼åˆ¤æ–­(9,i,"èšè´¢")
+    æ–¹æ ¼åˆ¤æ–­(10,i,"å‰è¿›",å‚æ•°=3,é™„åŠ æ–‡å­—="æœºåœº")
+    æ–¹æ ¼åˆ¤æ–­(11, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="å¾—åˆ°çº¢åŒ…", å‚æ•°=200)
+    æ–¹æ ¼åˆ¤æ–­(12, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="è¢«ç”µä¿¡è¯ˆéª—", å‚æ•°=-300)
+    æ–¹æ ¼åˆ¤æ–­(14,i,"å‰è¿›",å‚æ•°=4,é™„åŠ æ–‡å­—="é«˜é“ç«™")
+    æ–¹æ ¼åˆ¤æ–­(16, i, "äº¤æ¢é’±è´¢")
+    æ–¹æ ¼åˆ¤æ–­(17, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="å¾—åˆ°çº¢åŒ…", å‚æ•°=200)
+    æ–¹æ ¼åˆ¤æ–­(18, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="è¯¯å…¥ç¼…åŒ—ï¼Œéœ€è¦äº¤é’±è„±èº«", å‚æ•°=-300)
+    æ–¹æ ¼åˆ¤æ–­(21, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="æ±¡æŸ“ç¯å¢ƒï¼Œäº¤ç½šæ¬¾", å‚æ•°=-350)
+    æ–¹æ ¼åˆ¤æ–­(22, i, "æ³•é™¢")
+    æ–¹æ ¼åˆ¤æ–­(23, i, "å‰è¿›", å‚æ•°=2, é™„åŠ æ–‡å­—="ç å¤´")
+    æ–¹æ ¼åˆ¤æ–­(24, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="çœ‹çƒèµ›", å‚æ•°=-150)
+    æ–¹æ ¼åˆ¤æ–­(25, i, "å¢å‡é’±", é™„åŠ æ–‡å­—="è§ä¹‰å‹‡ä¸ºï¼Œå¥–åŠ±", å‚æ•°=300)
+    åŸå¸‚æ–¹æ ¼åˆ¤æ–­(2, i, data.citylst[0])
+    åŸå¸‚æ–¹æ ¼åˆ¤æ–­(4, i,data.citylst[1])
+    # 10æœ‰
+    # æ–¹æ ¼13åˆ¤æ–­(i)
+    åŸå¸‚æ–¹æ ¼åˆ¤æ–­(13, i, data.citylst[2])
+    # 14æœ‰
+    åŸå¸‚æ–¹æ ¼åˆ¤æ–­(15, i, data.citylst[3])
+    # 19æ˜¯å…¬å›­
+    åŸå¸‚æ–¹æ ¼åˆ¤æ–­(20, i, data.citylst[4])
+    åŸå¸‚æ–¹æ ¼åˆ¤æ–­(26, i, data.citylst[5])
+    ç ´äº§åˆ¤æ–­()
+    # end=time.time()
+    # print(f'ä¸»åˆ¤æ–­å‡½æ•°æ‰§è¡Œç”¨äº†{end-start}ç§’')
 
-def Ìí¼Ó½ğÇ®¼ÇÂ¼(i):
-    global money
-    if i == 1 and ÆÆ²ú[1] == 0:
-        Íæ¼Ò1½ğÇ®¼ÇÂ¼.append(money[1])
-    if i == 2 and ÆÆ²ú[2] == 0:
-        Íæ¼Ò2½ğÇ®¼ÇÂ¼.append(money[2])
-    if i == 3 and ÆÆ²ú[3] == 0:
-        Íæ¼Ò3½ğÇ®¼ÇÂ¼.append(money[3])
-    if i == 4 and ÆÆ²ú[4] == 0:
-        Íæ¼Ò4½ğÇ®¼ÇÂ¼.append(money[4])
+def main(arg):
+    print("data.id=",data.id)
 
-def main():
-    global stateall, state1, state2, state3, state4
-    global ÆÆ²ú
-    if stateall % 4 == 0:  # Íæ¼Ò1»ØºÏ
-        if ÆÆ²ú[1] == 0:
-            ÒÆ¶¯Í¼Æ¬1()
-            ¼ıÍ·Ë¢ĞÂ(state1)
-            ÅĞ¶Ï(1)
-        ¼ıÍ·Ë¢ĞÂ(state2)
-        ÌáÊ¾Í¼Æ¬1.»»Í¼Æ¬(2)
-        ÎÄ×ÖË¢ĞÂ(2)
-        ¸»ºÀ°ñ¸üĞÂ()
-        # tk.Label(root, text=f'ÂÖµ½Íæ¼Ò{stateall % 4 + 2}', font=24).place(x=320, y=150)
-    if stateall % 4 == 1:  # Íæ¼Ò2»ØºÏ
-        if ÆÆ²ú[2] == 0:
-            ÒÆ¶¯Í¼Æ¬2()
-            ¼ıÍ·Ë¢ĞÂ(state2)
-            ÅĞ¶Ï(2,ai=ai_[2])     #ÊÇ·ñaiÔÚÕâÀï¸Ä
-        ¼ıÍ·Ë¢ĞÂ(state3)
-        ÌáÊ¾Í¼Æ¬1.»»Í¼Æ¬(3)
-        ÎÄ×ÖË¢ĞÂ(3)
-        ¸»ºÀ°ñ¸üĞÂ()
-    if stateall % 4 == 2:  # Íæ¼Ò3»ØºÏ
-        if ÆÆ²ú[3] == 0:
-            ÒÆ¶¯Í¼Æ¬3()
-            ¼ıÍ·Ë¢ĞÂ(state3)
-            ÅĞ¶Ï(3,ai=ai_[3])
-        ¼ıÍ·Ë¢ĞÂ(state4)
-        ÌáÊ¾Í¼Æ¬1.»»Í¼Æ¬(4)
-        ÎÄ×ÖË¢ĞÂ(4)
-        ¸»ºÀ°ñ¸üĞÂ()
-    if stateall % 4 == 3:  # Íæ¼Ò4»ØºÏ
-        if ÆÆ²ú[4] == 0:
-            ÒÆ¶¯Í¼Æ¬4()
-            ¼ıÍ·Ë¢ĞÂ(state4)
-            ÅĞ¶Ï(4,ai=ai_[4])
-        ¼ıÍ·Ë¢ĞÂ(state1)
-        ÌáÊ¾Í¼Æ¬1.»»Í¼Æ¬(1)
-        ÎÄ×ÖË¢ĞÂ(1)
-        ¸»ºÀ°ñ¸üĞÂ()
-    stateall += 1
-    Ìí¼Ó½ğÇ®¼ÇÂ¼(stateall % 4 + 1)
+    if data.è½®åˆ°è°==6:
+        messagebox.showinfo("æç¤º",f"æ¸¸æˆå·²ç»ç»“æŸï¼ç°åœ¨é€€å‡º")
+        root.destroy()
+        socket.close()
+        return
+    if data.è½®åˆ°è°!=data.id:
+        messagebox.showinfo("æç¤º","ç°åœ¨è¿˜ä¸æ˜¯ä½ çš„å›åˆå“¦ï¼")
+        return
+    # threading.Thread(target=è®¡æ—¶, args=(client_socket,)).start()
+    step=function_.éª°å­()
+    data.location[data.id]+=step
 
-def ÷»×Ó():
-    import numpy as np
-    import tkinter
-    import tkinter.messagebox  # µ¯´°¿â
-    y = np.random.randint(1, 7)  # ·¶Î§1-9£¨²»°üÀ¨10£©£¬ÊıÁ¿Èı¸ö
-    tkinter.messagebox.showinfo('÷»×Ó', f'Êı×ÖÎª{y}')  # Ç°Ãæ±êÍ·£¬ºóÃæÄÚÈİ
-    return y
 
-def Í¼Æ¬1_next():
-    global state1, XX,YY
+    if data.location[data.id]>26:
+        data.location[data.id]=data.location[data.id]-26  #å¾ªç¯å›åˆ°åˆå§‹ç‚¹
 
-    state1 += 1
-    if state1 == 27:
-        state1 = 1
-    XX[1] = ÇøÓò[state1][0] + 1
-    YY[1] = ÇøÓò[state1][1] + 1
-    ½ÇÉ«[0].replace((XX[1], YY[1]))
+    if data.id==1:                  #æœåŠ¡å™¨ç«¯
+        broadcast(data_encode(), None)
+        åŠ¨æ€åˆ·æ–°()
+        åˆ¤æ–­(data.id, data)
 
-def ÒÆ¶¯Í¼Æ¬1():
-    t = ÷»×Ó()
-    for x in range(t):
-        Í¼Æ¬1_next()
+        data.è½®åˆ°è° += 1
+        if data.è½®åˆ°è° == 3:
+            data.è½®åˆ°è° = 1
 
-def Í¼Æ¬2_next():
-    global state2
-    global XX
-    global YY
-    state2 += 1
-    if state2 == 27:
-        state2 = 1
-    XX[2] = ÇøÓò[state2][0] + 51
-    YY[2] = ÇøÓò[state2][1] + 1
-    ½ÇÉ«[1].replace((XX[2], YY[2]))
+        broadcast(data_encode(), None)
+        åŠ¨æ€åˆ·æ–°()
+    elif data.id==2:                #å®¢æˆ·ç«¯ï¼Œ
+        msg = data_encode()
+        client_socket.send(msg.encode('utf-8'))  # è¿™ä¸ªæ˜¯å¯¹åº”å‘é€æ•°æ®çš„
+        åˆ¤æ–­(data.id, data)
 
-def ÒÆ¶¯Í¼Æ¬2():
-    t = ÷»×Ó()
-    for x in range(t):
-        Í¼Æ¬2_next()
+        data.è½®åˆ°è° += 1
+        if data.è½®åˆ°è° == 3:
+            data.è½®åˆ°è° = 1
+        msg = data_encode()
+        client_socket.send(msg.encode('utf-8'))  # è¿™ä¸ªæ˜¯å¯¹åº”å‘é€æ•°æ®çš„
 
-def Í¼Æ¬3_next():
-    global state3
-    global XX
-    global YY
-    state3 += 1
-    if state3 == 27:
-        state3 = 1
-    XX[3] = ÇøÓò[state3][0] + 1
-    YY[3] = ÇøÓò[state3][1] + 51
-    ½ÇÉ«[2].replace((XX[3], YY[3]))
+    # print("data.money=",data.money)
 
-def ÒÆ¶¯Í¼Æ¬3():
-    t = ÷»×Ó()
-    for x in range(t):
-        Í¼Æ¬3_next()
 
-def Í¼Æ¬4_next():
-    global state4
-    global XX
-    global YY
-    state4 += 1
-    if state4 == 27:
-        state4 = 1
-    XX[4] = ÇøÓò[state4][0] + 51
-    YY[4] = ÇøÓò[state4][1] + 51
-    ½ÇÉ«[3].replace((XX[4], YY[4]))
+# 1200x600,æ¯è¡Œ10ä¸ªæ ¼ï¼Œæ¯åˆ—5ä¸ªæ ¼ï¼Œæ¯ä¸ªæ ¼120*120
+root = tk.Tk()
+root.geometry("1600x750")  # é•¿ä¹˜å®½
+w1 = Canvas(root, width=1200, height=650, background='blue')
+w1.place(x=0, y=0)
+æ£‹ç›˜x = 0;æ£‹ç›˜y = 50;åŒºåŸŸ = [None]  # å·¦ä¸Šåæ ‡çš„ä½ç½®
+def åŒºåŸŸåˆå§‹åŒ–():  # ç”¨forå¾ªç¯å¿«é€Ÿå®Œæˆ26ä¸ªåŒºåŸŸçš„åˆ’åˆ†
+    for _ in range(10):
+        åŒºåŸŸ.append((æ£‹ç›˜x + _ * 120, æ£‹ç›˜y))
+    for _ in range(3):
+        åŒºåŸŸ.append((æ£‹ç›˜x + 1080, æ£‹ç›˜y + _ * 120 + 120))
+    for _ in range(10):
+        åŒºåŸŸ.append((æ£‹ç›˜x + 1080 - _ * 120, æ£‹ç›˜y + 480))
+    for _ in range(3):
+        åŒºåŸŸ.append((æ£‹ç›˜x, æ£‹ç›˜y + 360 - _ * 120))
+åŒºåŸŸåˆå§‹åŒ–()
+æ–¹æ ¼1 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/èµ·ç‚¹.png", 1)
+æ–¹æ ¼2 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/å¹¿å·.png", 2)
+æ–¹æ ¼3 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/æ¼”å”±ä¼š.png", 3)
+æ–¹æ ¼4 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/é¦™æ¸¯.png", 4)
+æ–¹æ ¼5 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/200çº¢åŒ….png", 5)
+æ–¹æ ¼6 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/èµŒåšç°é‡‘å‡åŠ.png", 6)
+æ–¹æ ¼7 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/å…¬å›­1.png", 7)
+æ–¹æ ¼8 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/æ³•é™¢.png", 8)
+æ–¹æ ¼9 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/äº¤æ˜“æ‰€.png", 9)
+æ–¹æ ¼10 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/é£æœº.png", 10)
+æ–¹æ ¼11 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/200çº¢åŒ….png", 11)
+æ–¹æ ¼12 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/ç”µä¿¡è¯ˆéª—.png", 12)
+æ–¹æ ¼13 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/ä¸Šæµ·.png", 13)
+æ–¹æ ¼14 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/é«˜é“.jpg", 14)
+æ–¹æ ¼15 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/çº½çº¦.png", 15)
+æ–¹æ ¼16 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/ä¸€å¤œæš´å¯Œ.png", 16)
+æ–¹æ ¼17 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/200çº¢åŒ….png", 17)
+æ–¹æ ¼18 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/ç¼…åŒ—.png", 18)
+æ–¹æ ¼19 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/å…¬å›­2.png", 19)
+æ–¹æ ¼20 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/åŒ—äº¬.png", 20)
+æ–¹æ ¼21 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/ç¯å¢ƒæ±¡æŸ“ç½šæ¬¾.png", 21)  # æ‹¬å·é‡Œä¸ºéœ€è¦æ˜¾ç¤ºåœ¨å›¾å½¢åŒ–ç•Œé¢é‡Œçš„å›¾ç‰‡
+æ–¹æ ¼22 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/æ³•é™¢.png", 22)
+æ–¹æ ¼23 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/è½®èˆ¹.jpg", 23)
+æ–¹æ ¼24 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/2018.png", 24)
+æ–¹æ ¼25 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/è§ä¹‰å‹‡ä¸ºï¼Œå¥–åŠ±300å…ƒ.png", 25)
+æ–¹æ ¼26 = å›¾ç‰‡2("æ¸¸æˆå›¾ç‰‡/ä¼¦æ•¦.png", 26)
+ç®­å¤´ = å›¾ç‰‡("æ¸¸æˆå›¾ç‰‡/å‘ä¸Šç®­å¤´.png", (åŒºåŸŸ[1][0], åŒºåŸŸ[1][1] + 120), (35, 35))
+æç¤ºå›¾ç‰‡1 = å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[1], (åŒºåŸŸ[3][0], åŒºåŸŸ[3][1] + 240), (125, 125))
+æ–‡å­—1 = æ–‡å­—((åŒºåŸŸ[3][0], åŒºåŸŸ[3][1] + 160), 32, "ç°åœ¨è½®åˆ°ç©å®¶1")
+å¼•å¯¼å›¾ç‰‡1 = å›¾ç‰‡(r"æ¸¸æˆå›¾ç‰‡\å¼•å¯¼å›¾ç‰‡1.png", (åŒºåŸŸ[6][0], åŒºåŸŸ[6][1] + 120),(125, 230))
+æ“ä½œè§„åˆ™å›¾ç‰‡ = å›¾ç‰‡(r"æ¸¸æˆå›¾ç‰‡\å¼•å¯¼æ–‡å­—.png",(åŒºåŸŸ[7][0] + 10, åŒºåŸŸ[7][1] + 120), (300, 230))
+é‡‘é’±ä¿¡æ¯1 = æ–‡å­—((åŒºåŸŸ[4][0] + 10, åŒºåŸŸ[4][1] + 260), 32, "åˆšåˆšå‘ç”Ÿçš„äº‹ä»¶ï¼š")
+åœ°äº§ä¿¡æ¯1 = æ–‡å­—((åŒºåŸŸ[4][0] + 10, åŒºåŸŸ[4][1] + 290), 32, "\n")
+åœ°äº§ä¿¡æ¯2 = æ–‡å­—((åŒºåŸŸ[4][0] + 10, åŒºåŸŸ[4][1] + 330), 32, "")
+å¯Œè±ªæ¦œæ–‡å­— = æ–‡å­—((åŒºåŸŸ[13][0] + 120, 0), 32, "å®æ—¶å¯Œè±ªæ¦œ")
 
-def ÒÆ¶¯Í¼Æ¬4():
-    t = ÷»×Ó()
-    for x in range(t):
-        Í¼Æ¬4_next()
+å¯Œè±ªæ¦œæ–‡å­—æ¸…å• = []
+å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å• = []
+å¯Œè±ªæ¦œæ–‡å­—æ¸…å•.append(æ–‡å­—((å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0], å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 75), 32, "NO.1ï¼šç©å®¶1\n èµ„é‡‘ï¼š1200"))
+å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•.append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[1], (å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0] + 180, å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 75), (50, 50)))
+å¯Œè±ªæ¦œæ–‡å­—æ¸…å•.append(æ–‡å­—((å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0], å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 200), 32, "NO.2ï¼šç©å®¶2\n èµ„é‡‘: 1200"))
+å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•.append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[2], (å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0] + 180, å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 200), (50, 50)))
 
-¼ÌĞø°´Å¥ = Í¼Æ¬°´Å¥("ÓÎÏ·Í¼Æ¬/¼ÌĞø°´Å¥.png", (ÇøÓò[18][0], ÇøÓò[18][1] - 100), (120, 100), main)
+# å¯Œè±ªæ¦œæ–‡å­—æ¸…å•.append(æ–‡å­—((å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0], å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 325), 32, "NO.3:ç©å®¶3\n èµ„é‡‘:1200"))
+# å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•.append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[3], (å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0] + 180, å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 325), (50, 50)))
+#
+å¯Œè±ªæ¦œæ–‡å­—æ¸…å•.append(æ–‡å­—((å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0]+10, å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 350), 32, "èŠå¤©æ¡†"))
+# å¯Œè±ªæ¦œå›¾ç‰‡æ¸…å•.append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[4], (å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[0] + 180, å¯Œè±ªæ¦œæ–‡å­—.ä½ç½®[1] + 450), (50, 50)))
 
+è§’è‰² = [None]
+è§’è‰².append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[1], (åŒºåŸŸ[1][0], åŒºåŸŸ[1][1]), (47, 47)));
+è§’è‰².append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[2], (åŒºåŸŸ[1][0]+50, åŒºåŸŸ[1][1]), (47, 47)));
+# è§’è‰².append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[3], (åŒºåŸŸ[1][0], åŒºåŸŸ[1][1]+50), (47, 47)));
+# è§’è‰².append(å›¾ç‰‡(data.è§’è‰²å›¾ç‰‡æ–‡ä»¶è·¯å¾„[4], (åŒºåŸŸ[1][0]+50, åŒºåŸŸ[1][1]+50), (47, 47)))
+
+ç»§ç»­æŒ‰é’® = å›¾ç‰‡æŒ‰é’®("æ¸¸æˆå›¾ç‰‡/ç»§ç»­æŒ‰é’®.png", (åŒºåŸŸ[18][0], åŒºåŸŸ[18][1] - 100), (120, 100), main)
+
+if data.å‡ äººæ¸¸æˆ==1:         #å•äººæ¸¸æˆ
+    pass
+
+if data.å‡ äººæ¸¸æˆ==2:         #å¤šäººæ¸¸æˆï¼Œåˆå§‹åŒ–æœåŠ¡å™¨æˆ–åŠ å…¥
+    ans = askokcancel("æç¤º", f"å·²æœ‰æˆ¿é—´ï¼Ÿï¼ˆç‚¹å‡»ç¡®å®šåŠ å…¥æˆ¿é—´ï¼Œç‚¹å‡»å–æ¶ˆåˆ›å»ºæˆ¿é—´ï¼‰")
+    if ans:                    #åŠ å…¥æˆ¿é—´çš„é€»è¾‘ï¼ˆå®¢æˆ·ç«¯ï¼‰
+        SERVER_IP=askstring("æç¤º","è¯·è¾“å…¥ç›®æ ‡IP")
+        # SERVER_IP = '127.0.0.1'
+        SERVER_PORT = askinteger("æç¤º","è¯·è¾“å…¥ç›®æ ‡port")
+        try:
+            client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            client_socket.connect((SERVER_IP, SERVER_PORT))
+            data.id=2                          #id=2å¯¹åº”2å·ç©å®¶
+            threading.Thread(target=receive_messages, args=(client_socket,)).start()
+        except:
+            tk.messagebox.showinfo("æç¤º","æ— æ³•è¿æ¥åˆ°è¯¥åœ°å€")
+
+    else:                     #åˆ›å»ºæœåŠ¡å™¨
+        SERVER_IP=function_.get_local_ip()
+        if not askokcancel("æç¤º", f"æ‚¨çš„IPæ˜¯{SERVER_IP},ç‚¹å‡»ç¡®å®šä½¿ç”¨è¯¥IPï¼Œç‚¹å‡»å–æ¶ˆä½¿ç”¨æœ¬åœ°å›è·¯"):
+            SERVER_IP = '127.0.0.1'
+
+
+        SERVER_PORT = 9999
+        clients = []
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.bind((SERVER_IP, SERVER_PORT))
+        server.listen(5)
+        print(f"Server started on {SERVER_IP}:{SERVER_PORT}")
+        data.id=1                      #id=1å¯¹åº”1å·ç©å®¶ï¼Œä¹Ÿå°±æ˜¯æœåŠ¡å™¨ç«¯
+        æ–‡å­—1.æ›´æ–°(f"ç­‰å¾…ç©å®¶åŠ å…¥,ip:{SERVER_IP}\nport:{SERVER_PORT}")
+        threading.Thread(target=TCP_service_main, args=()).start()
+
+
+app=SimpleChatRoom(root)
 root.mainloop()
 
-½áËãÒ³Ãæ = tk.Tk()
-½áËãÒ³Ãæ.geometry("500x600")
-½áËãÒ³Ãæ.title = "½áËãÒ³Ãæ"
-·½¸ñ1a = Image.open("ÓÎÏ·Í¼Æ¬/½áËãÒ³Ãæ.png")  # À¨ºÅÀïÎªĞèÒªÏÔÊ¾ÔÚÍ¼ĞÎ»¯½çÃæÀïµÄÍ¼Æ¬
-·½¸ñ1a = ·½¸ñ1a.resize((500, 600))  # ¹æ¶¨Í¼Æ¬´óĞ¡
-·½¸ñ1b = ImageTk.PhotoImage(·½¸ñ1a)
-·½¸ñ1c = ttk.Label(image=·½¸ñ1b)
-·½¸ñ1c.place(x=0, y=0)
+#é¿å…çº¿ç¨‹ç»§ç»­å ç”¨èµ„æº,æ‰€ä»¥è¦è®©ç­‰å¾…çš„çº¿ç¨‹ç»“æŸ
+print('over')
+data.ç»“æŸ=1
+def stop_client():
+    client_socket.close()
+def stop_service():
+    print("Stopping service...")
 
-def Éú³ÉÍæ¼ÒÒ»½ğÇ®Í¼±í():
-    y = Íæ¼Ò1½ğÇ®¼ÇÂ¼
-    print(y)
-    x = list(map(lambda x: x, range(len(Íæ¼Ò1½ğÇ®¼ÇÂ¼))))
-    for i in range(len(x)):
-        plt.text(x[i], y[i], y[i], color='r')
-    plt.plot(x, Íæ¼Ò1½ğÇ®¼ÇÂ¼)
-    plt.show()
+    for client in clients:
+        client.close()
+    server.close()
+    print("Service stopped.")
+if data.id==1:
+    stop_service()
+if data.id==2:
+    stop_client()
 
-bt1 = tk.Button(text="Íæ¼ÒÒ»ÊÂ¼ş", command=Íæ¼Ò1ĞÅÏ¢²éÑ¯·½·¨).place(x=200, y=300)
-bt5 = tk.Button(text="Íæ¼ÒÒ»½ğÇ®±ä»¯", command=Éú³ÉÍæ¼ÒÒ»½ğÇ®Í¼±í).place(x=200, y=350)
 
-def Éú³ÉÍæ¼Ò¶ş½ğÇ®Í¼±í():
-    y = Íæ¼Ò2½ğÇ®¼ÇÂ¼
-    print(y)
-    x = list(map(lambda x: x, range(len(Íæ¼Ò2½ğÇ®¼ÇÂ¼))))
-    for i in range(len(x)):
-        plt.text(x[i], y[i], y[i], color='r')
-    plt.plot(x, Íæ¼Ò2½ğÇ®¼ÇÂ¼)
-    plt.show()
-
-bt2 = tk.Button(text="Íæ¼Ò¶şÊÂ¼ş", command=Íæ¼Ò2ĞÅÏ¢²éÑ¯·½·¨).place(x=300, y=300)
-bt6 = tk.Button(text="Íæ¼Ò¶ş½ğÇ®±ä»¯", command=Éú³ÉÍæ¼Ò¶ş½ğÇ®Í¼±í).place(x=300, y=350)
-
-def Éú³ÉÍæ¼ÒÈı½ğÇ®Í¼±í():
-    y = Íæ¼Ò3½ğÇ®¼ÇÂ¼
-    print(y)
-    x = list(map(lambda x: x, range(len(Íæ¼Ò3½ğÇ®¼ÇÂ¼))))
-    for i in range(len(x)):
-        plt.text(x[i], y[i], y[i], color='r')
-    plt.plot(x, Íæ¼Ò3½ğÇ®¼ÇÂ¼)
-    plt.show()
-
-bt3 = tk.Button(text="Íæ¼ÒÈıÊÂ¼ş", command=Íæ¼Ò3ĞÅÏ¢²éÑ¯·½·¨).place(x=200, y=400)
-bt7 = tk.Button(text="Íæ¼ÒÈı½ğÇ®±ä»¯", command=Éú³ÉÍæ¼ÒÈı½ğÇ®Í¼±í).place(x=200, y=450)
-
-def Éú³ÉÍæ¼ÒËÄ½ğÇ®Í¼±í():
-    y = Íæ¼Ò4½ğÇ®¼ÇÂ¼
-    print(y)
-    x = list(map(lambda x: x, range(len(Íæ¼Ò4½ğÇ®¼ÇÂ¼))))
-    for i in range(len(x)):
-        plt.text(x[i], y[i], y[i], color='r')
-    plt.plot(x, Íæ¼Ò4½ğÇ®¼ÇÂ¼)
-    plt.show()
-
-bt4 = tk.Button(text="Íæ¼ÒËÄÊÂ¼ş", command=Íæ¼Ò4ĞÅÏ¢²éÑ¯·½·¨).place(x=300, y=400)
-bt8 = tk.Button(text="Íæ¼ÒËÄ½ğÇ®±ä»¯", command=Éú³ÉÍæ¼ÒËÄ½ğÇ®Í¼±í).place(x=300, y=450)
-
-½áËãÒ³Ãæ.mainloop()
